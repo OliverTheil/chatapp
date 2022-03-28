@@ -21,9 +21,30 @@ import {
 } from '@angular/fire/remote-config';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { AsideComponent } from './aside/aside.component';
+import { ChatComponent } from './chat/chat.component';
+import { FooterComponent } from './footer/footer.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { MessageComponent } from './message/message.component';
+import { InputfieldComponent } from './inputfield/inputfield.component';
+import { ThreadComponent } from './thread/thread.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    LoginComponent,
+    AsideComponent,
+    ChatComponent,
+    FooterComponent,
+    SearchbarComponent,
+    MessageComponent,
+    InputfieldComponent,
+    ThreadComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,6 +57,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebase),
+    FormsModule,
   ],
   providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],

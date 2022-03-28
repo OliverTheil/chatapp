@@ -1,0 +1,21 @@
+<div class="login">
+  <div class="login__window">
+    <div
+      class="login__window__auth"
+      *ngIf="auth.user | async as user; else showLogin"
+    >
+      <h1 #showHello>Hello {{ user.displayName }}!</h1>
+      <button routerLink="/main">To your chats</button>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <p>Please login or create a new user.</p>
+      <input [(ngModel)]="email" placeholder="email" type="text" />
+      <input [(ngModel)]="password" placeholder="password" type="text" />
+      <button (click)="loginEmail()">Login with email</button>
+      <button (click)="loginGoogle()">Login with Google</button>
+      <button (click)="createAccount()">Create a new account</button>
+      <button (click)="loginGuest()">Or login as guest</button>
+    </ng-template>
+  </div>
+</div>

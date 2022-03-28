@@ -1,0 +1,97 @@
+<section class="aside__section">
+  <div class="aside__section__user__div">
+    <p>USERNAME</p>
+    <img
+      class="aside__section__user__img"
+      src="https://avatars.dicebear.com/api/bottts/: example .svg"
+    />
+  </div>
+</section>
+<section class="aside__section">
+  <div class="aside__section__heading">
+    <p>Favourites</p>
+    <i
+      [class.turn]="hideGroup"
+      (click)="toggleHide()"
+      class="fa-solid fa-caret-down"
+    ></i>
+  </div>
+  <div [class.hide]="hideGroup" class="aside__section__group">
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-star"></i>
+      <p>Favourite</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-star"></i>
+      <p>Favourite</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-star"></i>
+      <p>Favourite</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-star"></i>
+      <p>Favourite</p>
+    </div>
+  </div>
+</section>
+<section class="aside__section">
+  <div class="aside__section__heading">
+    <p>Channels</p>
+    <i
+      [class.turn]="hideGroup"
+      (click)="toggleHide()"
+      class="fa-solid fa-caret-down"
+    ></i>
+  </div>
+  <div [class.hide]="hideGroup" class="aside__section__group">
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-regular fa-chart-bar"></i>
+      <p>Channel</p>
+    </div>
+  </div>
+</section>
+<section class="aside__section">
+  <div class="aside__section__heading">
+    <p>Messages</p>
+    <i
+      [class.turn]="hideGroup"
+      (click)="toggleHide()"
+      class="fa-solid fa-caret-down"
+    ></i>
+  </div>
+  <div [class.hide]="hideGroup" class="aside__section__group">
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-user-large"></i>
+      <p>Alex</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-user-large"></i>
+      <p>Tobi</p>
+    </div>
+    <div class="aside__section__channel__div">
+      <i class="fa-solid fa-user-large"></i>
+      <p>Peter</p>
+    </div>
+  </div>
+</section>

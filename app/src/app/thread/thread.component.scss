@@ -1,0 +1,38 @@
+.thread__head {
+  border-bottom: 1px solid rgba(224, 106, 9, 0.767);
+  width: 200px;
+  margin-left: 0 !important;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  background: rgb(53, 53, 53);
+  p {
+    font-weight: 400;
+  }
+  :hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+.thread__close {
+  padding: 8px;
+  &:hover {
+    cursor: pointer;
+    color: rgba(224, 106, 9, 0.767);
+    filter: brightness(1.5);
+    border-radius: 6px;
+    @extend .boxShadow;
+  }
+}
+
+.boxShadow {
+  box-shadow: rgba(66, 66, 66, 0.637) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.thread__messages {
+  margin-top: 60px;
+}
