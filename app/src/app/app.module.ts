@@ -11,7 +11,7 @@ import {
   ScreenTrackingService,
   UserTrackingService,
 } from '@angular/fire/analytics';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth, AuthCredential } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
@@ -31,6 +31,16 @@ import { MessageComponent } from './message/message.component';
 import { InputfieldComponent } from './inputfield/inputfield.component';
 import { ThreadComponent } from './thread/thread.component';
 import { MainComponent } from './main/main.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { SignupComponent } from './signup/signup.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+
+
+;
 
 @NgModule({
   declarations: [
@@ -44,11 +54,15 @@ import { MainComponent } from './main/main.component';
     MessageComponent,
     InputfieldComponent,
     ThreadComponent,
+    SignupComponent,
+    VerifyEmailComponent,
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -56,10 +70,23 @@ import { MainComponent } from './main/main.component';
     provideMessaging(() => getMessaging()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
+
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+
+
+
+
+
+
+
   ],
   providers: [ScreenTrackingService, UserTrackingService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
