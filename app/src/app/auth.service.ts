@@ -42,6 +42,7 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);
+
       })
       .catch((error) => {
         window.alert(error.message);
@@ -52,10 +53,16 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        this.afs.collection('users')
+          .doc(result.user.uid)
+          .set({
+            ID: result.user.uid
+          });
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
+        console.log(result.user.uid)
       })
       .catch((error) => {
         window.alert(error.message);
