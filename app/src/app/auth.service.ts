@@ -1,56 +1,45 @@
 import { Injectable, NgZone } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { User } from '../app/shared/services/user';
 import * as auth from 'firebase/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { IdTokenResult, User } from 'firebase/auth';
-
-
-
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  [x: string]: any;
-  /* Saving user data in localstorage when 
-   logged in and setting up null when logged out */
-  userData: any;
-  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public ngZone: NgZone) {
-
+  userData: any; // Save logged in user data
+  constructor(
+    public afs: AngularFirestore, // Inject Firestore service
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public router: Router,
+    public ngZone: NgZone // NgZone service to remove outside scope warning
+  ) {
+    /* Saving user data in localstorage when 
+    logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
-
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-
-
-
-
   }
-
-
-
-
-
-
   // Sign in with email/password
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['main']);
+          this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);
       })
@@ -122,40 +111,19 @@ export class AuthService {
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.collection('users').doc(`${user.uid}`);
-
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
-      isAnonymous: false,
-      metadata: undefined,
-      providerData: [],
-      refreshToken: '',
-      tenantId: '',
-      delete: function (): Promise<void> {
-        throw new Error('Function not implemented.');
-      },
-      getIdToken: function (forceRefresh?: boolean): Promise<string> {
-        throw new Error('Function not implemented.');
-      },
-      getIdTokenResult: function (forceRefresh?: boolean): Promise<IdTokenResult> {
-        throw new Error('Function not implemented.');
-      },
-      reload: function (): Promise<void> {
-        throw new Error('Function not implemented.');
-      },
-      toJSON: function (): object {
-        throw new Error('Function not implemented.');
-      },
-      phoneNumber: '',
-      providerId: ''
-
     };
-    return userRef.set({ userData });
-
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
   // Sign out
   SignOut() {
@@ -165,4 +133,3 @@ export class AuthService {
     });
   }
 }
-

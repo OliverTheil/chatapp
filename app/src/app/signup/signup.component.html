@@ -2,12 +2,12 @@
     <div class="login__window">
 
         <div>
-            <p>Please login or create a new user.</p>
+            <p>Create a new user.</p>
 
             <input placeholder="email" type="text" #userMail required />
             <input placeholder="password" type="text" #userPassword required />
             <button (click)="authService.SignUp(userMail.value, userPassword.value)">Sign Up</button>
-            <button (click)="authService.GoogleAuth()">Sign Up with Google</button>
+
         </div>
     </div>
 </div>

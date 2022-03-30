@@ -4,6 +4,6 @@
         <p>We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
     </div>
 
-    <button type="button" class=( click)="authService.SendVerificationMail()">Resend Verification Email</button>
+    <button type="button" (click)="authService.SendVerificationMail()">Resend Verification Email</button>
 </div>
-<span>Go back to?<span class="redirect" routerLink="/signin"> Sign in</span></span>
+<a class="redirect" routerLink="/"> Go Back</a>
