@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  userName: UserName = new UserName();
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {

@@ -3,7 +3,8 @@
 
         <div>
             <p>Create a new user.</p>
-
+            <input [(ngModel)]="userName.firstName" placeholder="firstname" type="text" />
+            <input [(ngModel)]="userName.lastName" placeholder="lastname" type="text" />
             <input placeholder="email" type="text" #userMail required />
             <input placeholder="password" type="text" #userPassword required />
             <button (click)="authService.SignUp(userMail.value, userPassword.value)">Sign Up</button>

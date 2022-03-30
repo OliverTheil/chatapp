@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { UserName } from 'src/models/username.class';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  userName = new UserName();
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -56,7 +58,8 @@ export class AuthService {
         this.afs.collection('users')
           .doc(result.user.uid)
           .set({
-            ID: result.user.uid
+            Firstname: this.userName.firstName,
+            Lastname: this.userName.lastName
           });
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
