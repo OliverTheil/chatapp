@@ -3,12 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class DataService {
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
+  private open = new BehaviorSubject(false);
+  currentState = this.open.asObservable();
 
   constructor() {}
-
-  changeMessage(message: string) {
-    this.messageSource.next(message);
+  toggleOpen(openState: boolean) {
+    this.open.next(openState);
   }
 }

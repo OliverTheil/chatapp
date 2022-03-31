@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageComponent } from '../message/message.component';
+import { DataService } from '../data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +9,17 @@ import { MessageComponent } from '../message/message.component';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  constructor() {}
+  openState: boolean = false;
+  subscription: Subscription;
+  constructor(private data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.subscription = this.data.currentState.subscribe(
+      (openState) => (this.openState = openState)
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

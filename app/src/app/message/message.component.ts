@@ -10,23 +10,22 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./message.component.scss'],
 })
 export class MessageComponent implements OnInit, OnDestroy {
-  message: string;
+  openState: boolean = false;
   subscription: Subscription;
-  public open = false;
 
   constructor(private data: DataService) {}
 
   ngOnInit(): void {
-    this.subscription = this.data.currentMessage.subscribe(
-      (message) => (this.message = message)
+    this.subscription = this.data.currentState.subscribe(
+      (openState) => (this.openState = openState)
     );
   }
 
-  toggleMessage() {
-    if (!this.open) {
-      this.open = true;
-    } else if (this.open) {
-      this.open = false;
+  changeState() {
+    if (!this.openState) {
+      this.data.toggleOpen(true);
+    } else if (this.openState) {
+      this.data.toggleOpen(false);
     }
   }
 

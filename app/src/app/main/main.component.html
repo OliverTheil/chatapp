@@ -4,8 +4,8 @@
     <div class="main">
       <app-searchbar class="searchbar"></app-searchbar>
       <app-chat class="chat"></app-chat>
-      <app-inputfield class="input"></app-inputfield>
+      <app-inputfield [class.hide]="!openState" class="input"></app-inputfield>
     </div>
-    <app-thread class="thread relative"></app-thread>
+    <app-thread [class.hide]="!openState" class="thread relative"></app-thread>
   </div>
 </main>
