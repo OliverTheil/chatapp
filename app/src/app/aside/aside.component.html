@@ -1,113 +1,121 @@
-<section class="aside__section">
-  <div (click)="openUserEdit()" class="aside__section__user__div">
-    <p>USERNAME</p>
-    <img
-      class="aside__section__user__img"
-      src="https://avatars.dicebear.com/api/bottts/: example .svg"
+<section class="aside__enable--hide">
+  <section class="aside__section">
+    <div (click)="openUserEdit()" class="aside__section__user__div">
+      <p>USERNAME</p>
+      <img
+        class="aside__section__user__img"
+        src="https://avatars.dicebear.com/api/bottts/: example .svg"
+      />
+    </div>
+  </section>
+  <section class="aside__section">
+    <div class="aside__section__heading">
+      <p>Favourites</p>
+      <i
+        [class.turn]="hideFav"
+        (click)="toggleFav()"
+        class="fa-solid fa-caret-down"
+      ></i>
+    </div>
+    <div [class.hide]="hideFav" class="aside__section__group">
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-star"></i>
+        <p>Favourite</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-star"></i>
+        <p>Favourite</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-star"></i>
+        <p>Favourite</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-plus"></i>
+        <p class="font--18">add favourite</p>
+      </div>
+    </div>
+  </section>
+  <section class="aside__section">
+    <div class="aside__section__heading">
+      <p>Channels</p>
+      <i
+        [class.turn]="hideChannel"
+        (click)="toggleChannel()"
+        class="fa-solid fa-caret-down"
+      ></i>
+    </div>
+    <div [class.hide]="hideChannel" class="aside__section__group">
+      <div class="aside__section__channel__div">
+        <i class="fa-regular fa-chart-bar"></i>
+        <p>Channel</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-regular fa-chart-bar"></i>
+        <p>Channel</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-regular fa-chart-bar"></i>
+        <p>Channel</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-plus"></i>
+        <p class="font--18">add channel</p>
+      </div>
+    </div>
+  </section>
+  <section class="aside__section">
+    <div class="aside__section__heading">
+      <p>Messages</p>
+      <i
+        [class.turn]="hideDirects"
+        (click)="toggleDirects()"
+        class="fa-solid fa-caret-down"
+      ></i>
+    </div>
+    <div [class.hide]="hideDirects" class="aside__section__group">
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-user-large"></i>
+        <p>Alex</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-user-large"></i>
+        <p>Tobi</p>
+      </div>
+      <div class="aside__section__channel__div">
+        <i class="fa-solid fa-user-large"></i>
+        <p>Hans</p>
+      </div>
+    </div>
+  </section>
+  <section *ngIf="userClicked" class="aside__section userEdit fixed z--1">
+    <div class="userEdit__head">
+      <p>USERNAME</p>
+      <img
+        class="aside__section__user__img"
+        src="https://avatars.dicebear.com/api/bottts/: example .svg"
+      />
+    </div>
+    <input
+      *ngIf="changeName"
+      placeholder="your name"
+      type="text"
+      name=""
+      id=""
     />
-  </div>
-</section>
-<section class="aside__section">
-  <div class="aside__section__heading">
-    <p>Favourites</p>
-    <i
-      [class.turn]="hideFav"
-      (click)="toggleFav()"
-      class="fa-solid fa-caret-down"
-    ></i>
-  </div>
-  <div [class.hide]="hideFav" class="aside__section__group">
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-star"></i>
-      <p>Favourite</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-star"></i>
-      <p>Favourite</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-star"></i>
-      <p>Favourite</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-plus"></i>
-      <p class="font--18">add favourite</p>
-    </div>
-  </div>
-</section>
-<section class="aside__section">
-  <div class="aside__section__heading">
-    <p>Channels</p>
-    <i
-      [class.turn]="hideChannel"
-      (click)="toggleChannel()"
-      class="fa-solid fa-caret-down"
-    ></i>
-  </div>
-  <div [class.hide]="hideChannel" class="aside__section__group">
-    <div class="aside__section__channel__div">
-      <i class="fa-regular fa-chart-bar"></i>
-      <p>Channel</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-regular fa-chart-bar"></i>
-      <p>Channel</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-regular fa-chart-bar"></i>
-      <p>Channel</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-plus"></i>
-      <p class="font--18">add channel</p>
-    </div>
-  </div>
-</section>
-<section class="aside__section">
-  <div class="aside__section__heading">
-    <p>Messages</p>
-    <i
-      [class.turn]="hideDirects"
-      (click)="toggleDirects()"
-      class="fa-solid fa-caret-down"
-    ></i>
-  </div>
-  <div [class.hide]="hideDirects" class="aside__section__group">
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-user-large"></i>
-      <p>Alex</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-user-large"></i>
-      <p>Tobi</p>
-    </div>
-    <div class="aside__section__channel__div">
-      <i class="fa-solid fa-user-large"></i>
-      <p>Hans</p>
-    </div>
-  </div>
-</section>
-<section *ngIf="userClicked" class="aside__section userEdit fixed z--1">
-  <div class="userEdit__head">
-    <p>USERNAME</p>
-    <img
-      class="aside__section__user__img"
-      src="https://avatars.dicebear.com/api/bottts/: example .svg"
+    <input
+      *ngIf="changePic"
+      placeholder="type something"
+      type="text"
+      name=""
+      id=""
     />
-  </div>
-  <input *ngIf="changeName" placeholder="your name" type="text" name="" id="" />
-  <input
-    *ngIf="changePic"
-    placeholder="type something"
-    type="text"
-    name=""
-    id=""
-  />
-  <button (click)="showChangeName()">Change your name</button>
-  <button (click)="showChangePicture()">Change your picture</button>
-  <button *ngIf="changeName || changePic" (click)="saveChanges()">
-    Confirm
-  </button>
-  <button>Logout</button>
-  <i (click)="openUserEdit()" class="fa-solid fa-xmark close absolute"></i>
+    <button (click)="showChangeName()">Change your name</button>
+    <button (click)="showChangePicture()">Change your picture</button>
+    <button *ngIf="changeName || changePic" (click)="saveChanges()">
+      Confirm
+    </button>
+    <button>Logout</button>
+    <i (click)="openUserEdit()" class="fa-solid fa-xmark close absolute"></i>
+  </section>
 </section>
