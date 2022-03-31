@@ -131,3 +131,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+@media (max-width: 900px) {
+  .aside__enable--hide {
+    display: none;
+  }
+}

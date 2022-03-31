@@ -8,6 +8,12 @@
   justify-content: flex-start;
   align-items: center;
   background: rgba(53, 53, 53, 0.863);
+  @media (max-width: 900px) {
+    background: rgb(53, 53, 53);
+    width: 94%;
+    max-height: 94%;
+    padding: 8px;
+  }
 }
 
 .thread__head {
@@ -23,6 +29,9 @@
   p {
     font-weight: 400;
   }
+  @media (max-width: 500px) {
+    width: 120px;
+  }
 }
 
 .thread__messages {
@@ -37,7 +46,6 @@
   width: 260px;
   height: 192px;
   bottom: 8px;
-  right: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,6 +53,9 @@
   border: 1px solid rgba(255, 255, 255, 0.624);
   background-color: #2c2c2c;
   border-radius: 6px;
+  @media (max-width: 900px) {
+    width: 90%;
+  }
 }
 
 .inputfield__textarea {

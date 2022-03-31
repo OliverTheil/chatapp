@@ -36,6 +36,9 @@
   i {
     padding: 6px;
     margin-right: 12px;
+    @media (max-width: 360px) {
+      margin-right: 6px;
+    }
     &:hover {
       cursor: pointer;
       color: rgba(224, 106, 9, 0.767);
