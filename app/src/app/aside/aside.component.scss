@@ -16,9 +16,6 @@
 .aside__section__group {
   width: 100%;
   cursor: pointer;
-  :hover {
-    transform: scale(1.05);
-  }
 }
 
 .turn {
@@ -34,6 +31,14 @@
   i {
     margin-right: 16px;
   }
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.5);
+    p,
+    i {
+      color: rgba(224, 106, 9, 0.767);
+    }
+  }
 }
 
 .aside__section__user__div {
@@ -41,6 +46,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    p {
+      color: rgba(224, 106, 9, 0.767);
+    }
+  }
 }
 
 .aside__section__user__img {
@@ -48,7 +61,6 @@
   width: 40px;
   object-fit: contain;
   border-radius: 8px;
-  border: 1px solid rgba(224, 106, 9, 0.767);
 }
 
 .aside__section__heading {
@@ -61,8 +73,61 @@
   p {
     font-weight: 400;
   }
-  :hover {
-    cursor: pointer;
-    transform: scale(1.05);
+  &:hover {
+    i {
+      cursor: pointer;
+      color: rgba(224, 106, 9, 0.767);
+    }
   }
+}
+
+.userEdit {
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: fit-content;
+  transform: translate(-50%, -50%);
+  background: rgb(53, 53, 53);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  button {
+    width: 260px;
+  }
+
+  input {
+    width: 244px;
+  }
+
+  p {
+    padding: 16px;
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: 2.4rem;
+    text-align: center;
+  }
+
+  i {
+    top: 16px;
+    right: 16px;
+  }
+
+  @media (max-width: 360px) {
+    width: 100vw;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 0;
+    max-height: none;
+  }
+}
+
+.userEdit__head {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

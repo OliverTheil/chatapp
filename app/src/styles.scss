@@ -69,6 +69,21 @@ section {
   }
 }
 
+.close {
+  padding: 8px;
+  &:hover {
+    cursor: pointer;
+    color: rgba(224, 106, 9, 0.767);
+    filter: brightness(1.5);
+    border-radius: 6px;
+    @extend .boxShadow;
+  }
+}
+
+.font--18 {
+  font-size: 1.8rem;
+}
+
 .fixed {
   position: fixed;
 }
@@ -92,6 +107,9 @@ section {
 .z {
   &--1 {
     z-index: 1;
+  }
+  &--2 {
+    z-index: 2;
   }
 }
 

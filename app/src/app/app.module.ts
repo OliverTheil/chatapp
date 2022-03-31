@@ -38,9 +38,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
-
-
-;
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -56,8 +54,6 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     ThreadComponent,
     SignupComponent,
     VerifyEmailComponent,
-
-
   ],
   imports: [
     BrowserModule,
@@ -78,15 +74,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-
-
-
-
-
-
-
   ],
-  providers: [ScreenTrackingService, UserTrackingService],
+  providers: [ScreenTrackingService, UserTrackingService, DataService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

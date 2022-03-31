@@ -1,11 +1,15 @@
 <main>
   <app-aside class="aside fixed z--1"></app-aside>
-  <div class="mainbody">
+  <div class="main__div">
     <div class="main">
-      <app-searchbar class="searchbar"></app-searchbar>
+      <app-searchbar></app-searchbar>
       <app-chat class="chat"></app-chat>
-      <app-inputfield class="input"></app-inputfield>
+      <app-inputfield></app-inputfield>
     </div>
-    <app-thread class="thread relative"></app-thread>
+    <app-thread
+      id="thread"
+      [class.hide]="!openState"
+      class="thread relative"
+    ></app-thread>
   </div>
 </main>

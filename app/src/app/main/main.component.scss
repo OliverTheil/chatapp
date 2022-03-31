@@ -5,27 +5,20 @@ main {
   display: flex;
 }
 
-.footer {
-  width: 100%;
-  height: 200px;
-  background-color: rgba(224, 106, 9, 0.507);
-}
-
-.mainbody {
+.main__div {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
 .main {
-  width: 80vw;
   height: 100%;
   display: flex;
   margin-left: 220px;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -42,8 +35,8 @@ main {
 }
 
 .chat {
+  max-width: 100%;
   padding: 8px;
-  width: 96%;
   height: 100%;
   border-radius: 6px;
   margin: 8px;
@@ -55,23 +48,11 @@ main {
   background: rgba(53, 53, 53, 0.863);
 }
 
-.input {
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 99%;
+app-inputfield {
+  width: 100%;
 }
 
-.thread {
-  height: 96%;
-  width: 300px;
-  padding: 8px 8px 16px 8px;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-y: scroll;
-  background: rgba(53, 53, 53, 0.863);
+app-thread {
+  width: 300px !important;
+  height: 100%;
 }
