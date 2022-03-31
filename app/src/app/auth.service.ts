@@ -8,6 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
+import * as firebase from 'firebase/compat';
 
 
 @Injectable({
@@ -52,6 +53,7 @@ export class AuthService {
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
+
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
@@ -65,7 +67,8 @@ export class AuthService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        console.log(result.user.uid)
+
+        console.log(this.userName.firstName)
       })
       .catch((error) => {
         window.alert(error.message);
@@ -135,6 +138,8 @@ export class AuthService {
       merge: true,
     });
   }
+
+
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
