@@ -1,7 +1,12 @@
 <section class="aside__enable--hide">
+  <i
+    [class.show]="openMobileState"
+    [class.hide]="!openMobileState"
+    (click)="changeMobileState()"
+    class="close fa-solid fa-xmark absolute"
+  ></i>
   <section class="aside__section">
     <div (click)="openUserEdit()" class="aside__section__user__div">
-      <p>USERNAME</p>
       <img
         class="aside__section__user__img"
         src="https://avatars.dicebear.com/api/bottts/: example .svg"
@@ -18,14 +23,6 @@
       ></i>
     </div>
     <div [class.hide]="hideFav" class="aside__section__group">
-      <div class="aside__section__channel__div">
-        <i class="fa-solid fa-star"></i>
-        <p>Favourite</p>
-      </div>
-      <div class="aside__section__channel__div">
-        <i class="fa-solid fa-star"></i>
-        <p>Favourite</p>
-      </div>
       <div class="aside__section__channel__div">
         <i class="fa-solid fa-star"></i>
         <p>Favourite</p>

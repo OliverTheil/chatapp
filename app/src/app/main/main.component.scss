@@ -16,7 +16,7 @@ main {
 .main {
   height: 100%;
   display: flex;
-  margin-left: 230px;
+  margin-left: 240px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -34,11 +34,11 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  background: rgba(53, 53, 53, 0.863);
+  background: rgb(53, 53, 53);
   border-radius: 6px;
+  overflow-y: auto;
   @media (max-width: 900px) {
     position: absolute;
-    background-color: transparent;
   }
 }
 
@@ -78,9 +78,10 @@ app-thread {
 .toggleNavbar {
   display: none;
   @media (max-width: 900px) {
+    font-size: 4rem;
     cursor: pointer;
     display: flex;
-    top: 24px;
+    top: 16px;
     left: 16px;
     &:hover {
       color: rgba(224, 106, 9, 0.767);

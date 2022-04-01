@@ -104,6 +104,12 @@ section {
   display: none !important;
 }
 
+.hide__aside {
+  @media (max-width: 900px) {
+    display: none !important;
+  }
+}
+
 .z {
   &--1 {
     z-index: 1;
@@ -124,17 +130,17 @@ textarea {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+// ::-webkit-scrollbar-track {
+//   background: rgb(53, 53, 53);
+// }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(224, 106, 9, 0.767);
-  border-radius: 4px;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: rgba(224, 106, 9, 0.767);
+//   border-radius: 4px;
+// }
 
 .boxShadow {
   box-shadow: rgba(66, 66, 66, 0.637) 0px 30px 60px -12px inset,

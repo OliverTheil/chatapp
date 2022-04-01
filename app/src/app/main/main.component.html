@@ -1,8 +1,16 @@
 <main>
-  <app-aside class="aside fixed z--1"></app-aside>
+  <app-aside
+    [class.show]="openMobileState"
+    [class.hide__aside]="!openMobileState"
+    class="aside fixed z--2"
+  ></app-aside>
   <div class="main__div">
     <div class="main">
-      <i class="toggleNavbar fa-solid fa-bars absolute"></i>
+      <i
+        [class.hide]="openMobileState"
+        (click)="changeMobileState()"
+        class="toggleNavbar fa-solid fa-bars absolute"
+      ></i>
       <app-searchbar></app-searchbar>
       <app-chat class="chat"></app-chat>
       <app-inputfield></app-inputfield>
@@ -10,7 +18,7 @@
     <app-thread
       id="thread"
       [class.hide]="!openState"
-      class="thread relative"
+      class="thread relative z--1"
     ></app-thread>
   </div>
 </main>

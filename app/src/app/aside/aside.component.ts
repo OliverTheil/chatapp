@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-aside',
@@ -12,10 +14,25 @@ export class AsideComponent implements OnInit {
   userClicked = false;
   changePic = false;
   changeName = false;
+  mobileAsideActive = false;
+  openMobileState = false;
+  subscription: Subscription;
 
-  constructor() {}
+  constructor(private data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscription = this.data.currentMobileState.subscribe(
+      (openMobileState) => (this.openMobileState = openMobileState)
+    );
+  }
+
+  changeMobileState() {
+    if (!this.openMobileState) {
+      this.data.toggleMobile(true);
+    } else if (this.openMobileState) {
+      this.data.toggleMobile(false);
+    }
+  }
 
   toggleFav() {
     if (!this.hideFav) {

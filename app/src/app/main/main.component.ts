@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class MainComponent implements OnInit {
   openState: boolean = false;
+  openMobileState: boolean = false;
   subscription: Subscription;
   constructor(private data: DataService) {}
 
@@ -17,6 +18,17 @@ export class MainComponent implements OnInit {
     this.subscription = this.data.currentState.subscribe(
       (openState) => (this.openState = openState)
     );
+    this.subscription = this.data.currentMobileState.subscribe(
+      (openMobileState) => (this.openMobileState = openMobileState)
+    );
+  }
+
+  changeMobileState() {
+    if (!this.openMobileState) {
+      this.data.toggleMobile(true);
+    } else if (this.openMobileState) {
+      this.data.toggleMobile(false);
+    }
   }
 
   ngOnDestroy() {
