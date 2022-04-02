@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MessageComponent } from '../message/message.component';
 import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +13,7 @@ export class MainComponent implements OnInit {
   openState: boolean = false;
   openMobileState: boolean = false;
   subscription: Subscription;
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private backend:BackendService) {}
 
   ngOnInit() {
     this.subscription = this.data.currentState.subscribe(
@@ -21,6 +22,8 @@ export class MainComponent implements OnInit {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
+
+      this.backend.setAllChannels();
   }
 
   changeMobileState() {

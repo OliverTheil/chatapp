@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
+import { BackendService } from '../backend.service';
+import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
+
 
 @Component({
   selector: 'app-aside',
@@ -17,14 +20,22 @@ export class AsideComponent implements OnInit {
   mobileAsideActive = false;
   openMobileState = false;
   subscription: Subscription;
+  allChannels = [];
+  constructor(private data: DataService, public backend: BackendService) {
 
-  constructor(private data: DataService) {}
+  }
 
   ngOnInit(): void {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
+
+
   }
+
+openDialogAddChannel(){
+
+}
 
   changeMobileState() {
     if (!this.openMobileState) {
@@ -89,4 +100,15 @@ export class AsideComponent implements OnInit {
      * ! FIRESTORE
      */
   }
+
+
+createChannel(channelName:string){
+  this.backend.createChannel(channelName);
+  console.log('button createchannel clicked');
+  
+}
+
+
+
+
 }

@@ -34,11 +34,11 @@ import { MainComponent } from './main/main.component';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { DataService } from './data.service';
+import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +54,8 @@ import { DataService } from './data.service';
     ThreadComponent,
     SignupComponent,
     VerifyEmailComponent,
+    DialogAddChannelComponent,
+    
   ],
   imports: [
     BrowserModule,
