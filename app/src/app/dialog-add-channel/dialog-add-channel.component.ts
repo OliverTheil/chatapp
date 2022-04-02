@@ -29,7 +29,7 @@ abort(){
 addChannel(channelID){
  
   console.log('adChannel channelID: ', channelID);
-
+  this.router.navigate(['/main']);
 }
 
 
