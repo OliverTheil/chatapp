@@ -42,7 +42,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['main/:id']);
         });
         this.SetUserData(result.user);
 
@@ -57,23 +57,24 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        this.afs.collection('users')
-          .doc(result.user.uid)
-          .set({
-            Firstname: this.userName.firstName,
-            Lastname: this.userName.lastName
-          });
+
+
         /* Call the SendVerificaitonMail() function when new user sign 
-        up and returns promise */
+  up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
 
-        console.log(this.userName.firstName)
+
+
       })
+
+
       .catch((error) => {
         window.alert(error.message);
       });
   }
+
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser
