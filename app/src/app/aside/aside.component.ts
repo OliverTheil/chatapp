@@ -3,7 +3,10 @@ import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserName } from 'src/models/username.class';
+import { AuthService } from '../auth.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -22,7 +25,9 @@ export class AsideComponent implements OnInit {
   openMobileState = false;
   subscription: Subscription;
   allChannels = [];
-  constructor(public router: Router,private data: DataService, public backend: BackendService) {
+  userId = '';
+  username: UserName = new UserName();
+  constructor(private route: ActivatedRoute, public afs: AngularFirestore, public authService: AuthService, public router: Router, private data: DataService, public backend: BackendService) {
 
   }
 
@@ -30,13 +35,32 @@ export class AsideComponent implements OnInit {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
+    this.route.paramMap.subscribe(paramMap => {
+      this.userId = paramMap.get('id');
+    })
+
+    console.log('ID', this.userId)
+    this.getUserName();
 
 
   }
+  getUserName() {
+    this.afs
+      .collection('users')
+      .doc(this.userId)
+      .valueChanges()
+      .subscribe((username: UserName) => {
 
-openDialogAddChannel(){
+        this.username = new UserName(username)
 
-}
+      })
+
+    console.log('username', this.username)
+
+  }
+  openDialogAddChannel() {
+
+  }
 
   changeMobileState() {
     if (!this.openMobileState) {
@@ -103,10 +127,10 @@ openDialogAddChannel(){
   }
 
 
-openChannel(id:string){
-  this.router.navigate(['/main/'+ id]);
-  console.log('openChannel: ', id);
-}
+  openChannel(id: string) {
+    this.router.navigate(['/main/' + id]);
+    console.log('openChannel: ', id);
+  }
 
 
 }

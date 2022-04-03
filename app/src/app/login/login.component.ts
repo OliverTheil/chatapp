@@ -14,26 +14,14 @@ export class LoginComponent implements OnInit {
   title = 'slacktest';
   email: string = '';
   password: string = '';
-  userName = new UserName;
+  userName = new UserName();
 
   constructor(public auth: AngularFireAuth, public authService: AuthService) { }
   ngOnInit(): void { }
 
-  loginGoogle() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-
-  loginEmail() {
-
-    this.auth.signInWithEmailAndPassword(this.email, this.password);
-  }
 
   loginGuest() {
     this.auth.signInAnonymously();
-  }
-
-  createAccount() {
-    this.auth.createUserWithEmailAndPassword(this.email, this.password);
   }
 
   logout() {

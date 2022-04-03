@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import * as firebase from 'firebase/compat';
+import { resourceLimits } from 'worker_threads';
 
 
 @Injectable({
@@ -42,7 +43,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['main/:id']);
+          this.router.navigate(['/main/' + result.user.uid]);
         });
         this.SetUserData(result.user);
 
@@ -58,21 +59,14 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
 
-
         /* Call the SendVerificaitonMail() function when new user sign 
   up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
 
-
-
       })
-
-
-      .catch((error) => {
-        window.alert(error.message);
-      });
   }
+
 
 
   // Send email verfificaiton when new user sign up
@@ -103,7 +97,7 @@ export class AuthService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        this.router.navigate(['main']);
+        this.router.navigate(['/main/' + this.userData.user.uid]);
       }
     });
   }
@@ -113,7 +107,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['main']);
+          this.router.navigate(['main' + result.user.uid]);
         });
         this.SetUserData(result.user);
       })

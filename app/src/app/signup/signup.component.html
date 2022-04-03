@@ -7,7 +7,7 @@
             <input [(ngModel)]="userName.lastName" placeholder="lastname" type="text" />
             <input placeholder="email" type="text" #userMail required />
             <input placeholder="password" type="text" #userPassword required />
-            <button (click)="authService.SignUp(userMail.value, userPassword.value); saveName()">Sign Up</button>
+            <button (click)="authService.SignUp(userMail.value, userPassword.value);saveName()">Sign Up</button>
 
         </div>
     </div>
