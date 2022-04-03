@@ -12,15 +12,13 @@
                     <img class="message__user__img" src="https://avatars.dicebear.com/api/bottts/: example1 .svg" />
                     <div class="message__user__info">
                         <p class="message__username">{{ message.creator }}</p>
-                        <p class="message__time">at: TIME</p>
+                        <p class="message__time">at: {{ message.date }}</p>
                     </div>
                 </div>
                 <div class="message__user__text">
                     {{ message.text }}
                 </div>
-                <div>
-                    <p (click)="changeState()" class="highlighted">React</p>
-                </div>
+
             </div>
         </section>
 
@@ -30,14 +28,14 @@
 
     </div>
     <section class="thread__inputfield fixed">
-        <textarea class="inputfield__textarea" name="" id="" cols="100" rows="6"></textarea>
+        <textarea [(ngModel)]="thread.text" class="inputfield__textarea" name="" id="" cols="100" rows="6"></textarea>
         <div class="inputfield__buttons">
             <i class="fa-solid fa-plus"></i>
             <i class="fa-solid fa-at"></i>
             <i class="fa-solid fa-bold"></i>
             <i class="fa-solid fa-italic"></i>
             <i class="fa-solid fa-code"></i>
-            <i class="fa-solid fa-paper-plane"></i>
+            <i class="fa-solid fa-paper-plane" (click)="saveMessage()"></i>
         </div>
     </section>
 </section>

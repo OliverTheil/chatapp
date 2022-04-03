@@ -2,7 +2,7 @@
 export class Thread {
     imgUrl!: string;
     text!: string;
-    creator!: number;
+    creator!: string;
     date!: number;
 
     

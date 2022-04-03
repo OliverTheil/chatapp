@@ -77,13 +77,39 @@ export class BackendService {
       });
   }
 
-  saveThread() {
-    this.threadValues.date = Date.now();
+  saveThread(thread) {
+    
     this.firestore
       .collection('channels')
-      .doc(this.actualChannel)
+      .doc(this.channelID)
       .collection('Threads')
-      .add(this.thread.toJson())
+      .add(thread.toJson())
       .then((result: any) => {});
+  }
+
+  saveMessage(message){
+    this.firestore
+      .collection('channels')
+      .doc(this.channelID)
+      .collection('Threads')
+      .doc(this.actualThread)
+      .collection('messages')
+      .add(message.toJson())
+      .then((result: any) =>{
+        console.log('message saved:', result);
+      })
+  }
+  
+
+  getUserNameFromId(id){
+    let name;
+    name = this.firestore
+    .collection('users')
+    .get
+  }
+
+
+  getUserIdFromLocalStorage(){
+    console.log('userIdLocal:', JSON.parse(localStorage.getItem('user')));
   }
 }
