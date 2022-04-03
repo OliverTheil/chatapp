@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Thread } from 'src/models/thread.class';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,8 @@ export class BackendService {
 
   constructor(
     private firestore: AngularFirestore,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.setAllChannels();
   }
@@ -71,6 +73,7 @@ export class BackendService {
       .add({ createdOn: Date.now(), channelName: channelName })
       .then((result: any) => {
         this.actualChannel = result.id;
+        this.router.navigate(['/main/' + this.actualChannel]);
       });
   }
 
