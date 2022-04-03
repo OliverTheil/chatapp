@@ -32,7 +32,7 @@
 
         <div [class.hide]="hideChannel" class="aside__section__group">
 
-            <div class="aside__section__channel__div" *ngFor="let channel of backend.allChannels">
+            <div class="aside__section__channel__div" *ngFor="let channel of backend.allChannels" (click)="openChannel(channel.channelID)">
                 <i class="fa-regular fa-chart-bar"></i>
                 <p>{{ channel['channelName'] }}</p>
             </div>

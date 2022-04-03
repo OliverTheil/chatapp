@@ -8,7 +8,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'main', component: MainComponent },
+  { path: 'main/:id', component: MainComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'create-channel', component: DialogAddChannelComponent },

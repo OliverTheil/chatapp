@@ -10,7 +10,7 @@ import { BackendService } from '../backend.service';
 export class DialogAddChannelComponent implements OnInit {
   channelName: string;
   channelNameAdd: string;
-  constructor(public backend: BackendService, public router: Router,) { }
+  constructor(public backend: BackendService, public router: Router) { }
 
   ngOnInit(): void {
   }

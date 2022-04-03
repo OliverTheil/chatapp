@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class AsideComponent implements OnInit {
   openMobileState = false;
   subscription: Subscription;
   allChannels = [];
-  constructor(private data: DataService, public backend: BackendService) {
+  constructor(public router: Router,private data: DataService, public backend: BackendService) {
 
   }
 
@@ -102,13 +103,10 @@ openDialogAddChannel(){
   }
 
 
-createChannel(channelName:string){
-  this.backend.createChannel(channelName);
-  console.log('button createchannel clicked');
-  
+openChannel(id:string){
+  this.router.navigate(['/main/'+ id]);
+  console.log('openChannel: ', id);
 }
-
-
 
 
 }
