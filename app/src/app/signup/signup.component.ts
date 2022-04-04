@@ -21,7 +21,9 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
+
   saveName() {
 
     this.afs.collection('users')
@@ -31,8 +33,10 @@ export class SignupComponent implements OnInit {
         Lastname: this.userName.lastName
 
       })
+
     console.log('Firstname', this.userName.firstName)
   }
+
 }
 
 

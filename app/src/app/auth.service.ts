@@ -64,9 +64,9 @@ export class AuthService {
         this.SendVerificationMail();
         this.SetUserData(result.user);
 
+
       })
   }
-
 
 
   // Send email verfificaiton when new user sign up
@@ -129,6 +129,7 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
+
     return userRef.set(userData, {
       merge: true,
     });

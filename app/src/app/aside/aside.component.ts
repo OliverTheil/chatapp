@@ -35,29 +35,10 @@ export class AsideComponent implements OnInit {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
-    this.route.paramMap.subscribe(paramMap => {
-      this.userId = paramMap.get('id');
-    })
-
-    console.log('ID', this.userId)
-    this.getUserName();
 
 
   }
-  getUserName() {
-    this.afs
-      .collection('users')
-      .doc(this.userId)
-      .valueChanges()
-      .subscribe((username: UserName) => {
 
-        this.username = new UserName(username)
-
-      })
-
-    console.log('username', this.username)
-
-  }
   openDialogAddChannel() {
 
   }

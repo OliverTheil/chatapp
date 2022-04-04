@@ -23,6 +23,8 @@ export class BackendService {
   public allThreads: any;
   channelID: string;
 
+  userId = '';
+
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class BackendService {
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        changes.forEach((element) => {});
+        changes.forEach((element) => { });
       });
   }
 
@@ -63,7 +65,7 @@ export class BackendService {
       .valueChanges({ idField: 'messageID' })
       .subscribe((changesmessages: any) => {
         this.allMessages = changesmessages;
-        changesmessages.forEach((element) => {});
+        changesmessages.forEach((element) => { });
       });
   }
 
@@ -78,16 +80,16 @@ export class BackendService {
   }
 
   saveThread(thread) {
-    
+
     this.firestore
       .collection('channels')
       .doc(this.channelID)
       .collection('Threads')
       .add(thread.toJson())
-      .then((result: any) => {});
+      .then((result: any) => { });
   }
 
-  saveMessage(message){
+  saveMessage(message) {
     this.firestore
       .collection('channels')
       .doc(this.channelID)
@@ -95,21 +97,33 @@ export class BackendService {
       .doc(this.actualThread)
       .collection('messages')
       .add(message.toJson())
-      .then((result: any) =>{
+      .then((result: any) => {
         console.log('message saved:', result);
       })
   }
-  
 
-  getUserNameFromId(id){
+  getUserName() {
     let name;
     name = this.firestore
-    .collection('users')
-    .get
+      .collection('users')
+      .doc(this.userId)
+      .get()
+  }
+
+  getUserId() {
+    this.route.paramMap.subscribe(paramMap => {
+      this.userId = paramMap.get('id');
+    })
+
+    console.log('ID', this.userId)
+    this.getUserName();
+
+
   }
 
 
-  getUserIdFromLocalStorage(){
+
+  getUserIdFromLocalStorage() {
     console.log('userIdLocal:', JSON.parse(localStorage.getItem('user')));
   }
 }
