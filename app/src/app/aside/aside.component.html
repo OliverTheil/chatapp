@@ -2,7 +2,7 @@
     <i [class.show]="openMobileState" [class.hide]="!openMobileState" (click)="changeMobileState()" class="close fa-solid fa-xmark absolute"></i>
     <section class="aside__section">
         <div (click)="openUserEdit()" class="aside__section__user__div">
-            <span>{{username.firstName}}</span>
+            <span>{{AuthService.userName.firstName}}</span>
             <img class="aside__section__user__img" src="https://avatars.dicebear.com/api/bottts/: example .svg" />
         </div>
     </section>

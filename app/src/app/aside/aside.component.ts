@@ -26,7 +26,7 @@ export class AsideComponent implements OnInit {
   subscription: Subscription;
   allChannels = [];
   username: UserName;
-  constructor(public router: Router, private data: DataService, public backend: BackendService) {
+  constructor(public router: Router, private data: DataService, public backend: BackendService, public AuthService: AuthService) {
 
   }
 
