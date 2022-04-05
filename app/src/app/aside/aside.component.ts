@@ -26,24 +26,53 @@ export class AsideComponent implements OnInit {
   subscription: Subscription;
   allChannels = [];
   username: UserName;
+  userId = '';
 
   constructor(
     public afs: AngularFirestore,
     public router: Router,
     private data: DataService,
     public backend: BackendService,
-    public AuthService: AuthService
-  ) {}
+    public AuthService: AuthService,
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-    // this.getUserData()
+    this.route.paramMap.subscribe(paramMap => {
+      this.userId = paramMap.get('id');
+    })
+
+    console.log('ID', this.userId)
+    this.getUserName();
+
+
+
   }
 
-  openDialogAddChannel() {}
+  getUserName() {
+
+    this.afs
+      .collection('users')
+      .doc(this.userId)
+      .valueChanges()
+      .subscribe((username) => {
+        this.username = new UserName(username)
+        this.username.firstName
+
+        console.log('retrieved user', username)
+
+      })
+
+  }
+
+
+
+
+  openDialogAddChannel() { }
 
   changeMobileState() {
     if (!this.openMobileState) {
