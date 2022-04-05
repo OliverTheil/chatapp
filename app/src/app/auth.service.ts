@@ -12,7 +12,6 @@ import * as firebase from 'firebase/compat';
 import { resourceLimits } from 'worker_threads';
 import { BackendService } from './backend.service';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -48,30 +47,22 @@ export class AuthService {
           this.router.navigate(['/main/' + result.user.uid]);
         });
         this.SetUserData(result.user);
-
-
       })
       .catch((error) => {
         window.alert(error.message);
       });
-
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
-
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-
         /* Call the SendVerificaitonMail() function when new user sign 
   up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
-
-
-      })
+        this.SignUpUserData(result.user);
+      });
   }
-
 
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
@@ -122,20 +113,30 @@ export class AuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
   SetUserData(user: any) {
-    console.log(user)
+    console.log(user);
     const userData: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+    };
+  }
 
+  SignUpUserData(user: any) {
+    console.log(user);
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
     };
 
-
-
-    return this.afs.collection('users')
+    return this.afs
+      .collection('users')
       .doc(user.uid)
       .set({
         userData,
@@ -143,24 +144,9 @@ export class AuthService {
         Lastname: this.userName.lastName,
       })
       .then(() => {
-        console.log(this.userName.firstName)
-      })
-
-
-
-
-
-
-
-
-
+        console.log(this.userName.firstName);
+      });
   }
-
-
-
-
-
-
 
   // Sign out
   SignOut() {
@@ -169,6 +155,4 @@ export class AuthService {
       this.router.navigate(['/']);
     });
   }
-
-
 }

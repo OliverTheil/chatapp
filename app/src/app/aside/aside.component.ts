@@ -9,7 +9,6 @@ import { AuthService } from '../auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User, user } from '@angular/fire/auth';
 
-
 @Component({
   selector: 'app-aside',
   templateUrl: './aside.component.html',
@@ -28,21 +27,23 @@ export class AsideComponent implements OnInit {
   allChannels = [];
   username: UserName;
 
-  constructor(public afs: AngularFirestore, public router: Router, private data: DataService, public backend: BackendService, public AuthService: AuthService) {
-
-  }
+  constructor(
+    public afs: AngularFirestore,
+    public router: Router,
+    private data: DataService,
+    public backend: BackendService,
+    public AuthService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-    this.getUserData()
+    // this.getUserData()
   }
 
-  openDialogAddChannel() {
-
-  }
+  openDialogAddChannel() {}
 
   changeMobileState() {
     if (!this.openMobileState) {
@@ -108,22 +109,20 @@ export class AsideComponent implements OnInit {
      */
   }
 
-
   openChannel(id: string) {
     this.router.navigate(['/main/' + id]);
     console.log('openChannel: ', id);
   }
-  getUserData() {
+  // getUserData() {
 
-    this.afs
-      .collection('users')
-      .doc(this.AuthService.userData.uid)
-      .valueChanges()
-      .subscribe(() => {
-        console.log(this.username.firstName)
+  //   this.afs
+  //     .collection('users')
+  //     .doc(this.AuthService.userData.uid)
+  //     .valueChanges()
+  //     .subscribe(() => {
+  //       console.log(this.username.firstName)
 
-      })
+  //     })
 
-  }
-
+  // }
 }
