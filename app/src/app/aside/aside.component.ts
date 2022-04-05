@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { User, user } from '@angular/fire/auth';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class AsideComponent implements OnInit {
   subscription: Subscription;
   allChannels = [];
   username: UserName;
-  constructor(public router: Router, private data: DataService, public backend: BackendService, public AuthService: AuthService) {
+
+  constructor(public afs: AngularFirestore, public router: Router, private data: DataService, public backend: BackendService, public AuthService: AuthService) {
 
   }
 
@@ -35,7 +37,7 @@ export class AsideComponent implements OnInit {
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-
+    this.getUserData()
   }
 
   openDialogAddChannel() {
@@ -111,6 +113,17 @@ export class AsideComponent implements OnInit {
     this.router.navigate(['/main/' + id]);
     console.log('openChannel: ', id);
   }
+  getUserData() {
 
+    this.afs
+      .collection('users')
+      .doc(this.AuthService.userData.uid)
+      .valueChanges()
+      .subscribe(() => {
+        console.log(this.username.firstName)
+
+      })
+
+  }
 
 }

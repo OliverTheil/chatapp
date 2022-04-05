@@ -140,14 +140,26 @@ export class AuthService {
       .set({
         userData,
         Firstname: this.userName.firstName,
-        Lastname: this.userName.lastName
-
+        Lastname: this.userName.lastName,
       })
       .then(() => {
         console.log(this.userName.firstName)
       })
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
 
 
   // Sign out
@@ -157,4 +169,6 @@ export class AuthService {
       this.router.navigate(['/']);
     });
   }
+
+
 }

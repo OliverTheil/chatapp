@@ -18,8 +18,7 @@ export class MainComponent implements OnInit {
   subscription: Subscription;
   channelID: string;
 
-  userId = '';
-  username: UserName = new UserName();
+
 
 
   constructor(private data: DataService, private backend: BackendService, private route: ActivatedRoute, public afs: AngularFirestore) { }
@@ -34,8 +33,7 @@ export class MainComponent implements OnInit {
     );
 
     this.backend.setAllChannels();
-    this.getUserId();
-    this.getUserName()
+
   }
 
   changeMobileState() {
@@ -50,27 +48,8 @@ export class MainComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  getUserId() {
-    this.route.paramMap.subscribe(paramMap => {
-      this.userId = paramMap.get('id');
-    })
-
-    console.log('ID', this.userId)
-    this.getUserName();
 
 
-  }
 
-  getUserName() {
 
-    this.afs
-      .collection('users')
-      .doc(this.userId)
-      .valueChanges()
-      .subscribe(() => {
-        this.username = new UserName(this.username)
-
-      })
-
-  }
 }

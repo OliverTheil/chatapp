@@ -6,4 +6,4 @@
 
     <button type="button" (click)="authService.SendVerificationMail()">Resend Verification Email</button>
 </div>
-<a class="redirect" routerLink="/"> Go Back</a>
+<a class="redirect" (click)="authService.SignOut()"> Go Back</a>
