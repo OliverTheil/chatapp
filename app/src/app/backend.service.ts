@@ -5,6 +5,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -64,8 +65,24 @@ export class BackendService {
       .valueChanges({ idField: 'messageID' })
       .subscribe((changesmessages: any) => {
         this.allMessages = changesmessages;
-        changesmessages.forEach((element) => { });
+  
+        changesmessages.forEach((element) => { 
+         });
       });
+  }
+
+
+  getUserNameFromFirebase(id){
+    let returnName: string;
+    this.firestore
+    .collection('users')
+    .doc(id)
+    .valueChanges()
+    .subscribe((userChanges: any) => {
+      returnName = userChanges['Firstname'] + ' ' + userChanges['Lastname'];
+        });
+        console.log('get_User:', returnName);
+    return returnName
   }
 
   createChannel(channelName: string) {
@@ -103,6 +120,18 @@ export class BackendService {
 
 
   getUserIdFromLocalStorage() {
-    console.log('userIdLocal:', JSON.parse(localStorage.getItem('user')));
+    let user = JSON.parse(localStorage.getItem('user'));
+    return user['uid']; 
   }
+
+  getActualDateFormat(timeInMiliseconds) {
+    let inputTime = new Date(timeInMiliseconds);
+    let year = inputTime.getFullYear();
+    let month = inputTime.getMonth();
+    let day = inputTime.getDay();
+    let hrs = inputTime.getHours();
+    let mins = inputTime.getMinutes();
+    return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
+  }
+
 }

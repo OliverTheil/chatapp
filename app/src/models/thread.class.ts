@@ -3,7 +3,7 @@ export class Thread {
     imgUrl!: string;
     text!: string;
     creator!: string;
-    date!: number;
+    date!: string;
 
     
     constructor(obj?: any) {

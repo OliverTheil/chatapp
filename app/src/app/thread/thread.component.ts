@@ -3,6 +3,7 @@ import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { Thread } from 'src/models/thread.class';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -12,12 +13,14 @@ export class ThreadComponent implements OnInit {
   openState: boolean = true;
   subscription: Subscription;
   thread = new Thread;
-  constructor(private data: DataService, public backend: BackendService) {}
+  constructor(private authService: AuthService, private data: DataService, public backend: BackendService) {}
 
   ngOnInit(): void {
     this.subscription = this.data.currentState.subscribe(
       (openState) => (this.openState = openState)
     );
+
+
   }
 
   changeState() {
@@ -33,11 +36,10 @@ export class ThreadComponent implements OnInit {
   }
 
   saveMessage(){
-    console.log('inputfield message clicked');
-    this.thread.creator = 'Heinz';
-    this.thread.date = Date.now();
+    
+    this.thread.creator = this.authService.userName.firstName + ' ' + this.authService.userName.lastName;;
+    this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveMessage(this.thread);
-    //this.backend.getUserIdFromLocalStorage();
   }
 
 

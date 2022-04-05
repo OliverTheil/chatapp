@@ -32,11 +32,13 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
+        this.setUserNameFromFirebase();
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+    
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -126,7 +128,7 @@ export class AuthService {
   }
 
   SignUpUserData(user: any) {
-    console.log(user);
+    console.log('SignUpUserData',user);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -155,4 +157,17 @@ export class AuthService {
       this.router.navigate(['/']);
     });
   }
+
+  
+  setUserNameFromFirebase(){
+    this.afs
+    .collection('users')
+    .doc(this.userData.uid)
+    .valueChanges()
+    .subscribe((userChanges: any) => {
+      this.userName.firstName = userChanges['Firstname'];
+      this.userName.lastName = userChanges['Lastname'];
+    });
+  }
+
 }

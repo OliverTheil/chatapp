@@ -45,8 +45,6 @@ export class AsideComponent implements OnInit {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
     })
-
-    console.log('ID', this.userId)
     this.getUserName();
 
 
@@ -54,7 +52,6 @@ export class AsideComponent implements OnInit {
   }
 
   getUserName() {
-
     this.afs
       .collection('users')
       .doc(this.userId)
@@ -62,9 +59,6 @@ export class AsideComponent implements OnInit {
       .subscribe((username) => {
         this.username = new UserName(username)
         this.username.firstName
-
-        console.log('retrieved user', username)
-
       })
 
   }
@@ -140,7 +134,6 @@ export class AsideComponent implements OnInit {
 
   openChannel(id: string) {
     this.router.navigate(['/main/' + id]);
-    console.log('openChannel: ', id);
   }
   // getUserData() {
 

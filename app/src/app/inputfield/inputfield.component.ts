@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Thread } from 'src/models/thread.class';
+import { UserName } from 'src/models/username.class';
+import { AuthService } from '../auth.service';
 import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-inputfield',
   templateUrl: './inputfield.component.html',
-  styleUrls: ['./inputfield.component.scss']
+  styleUrls: ['./inputfield.component.scss'],
 })
 export class InputfieldComponent implements OnInit {
-  thread = new Thread;
-  constructor(private backend: BackendService) { }
+  thread = new Thread();
 
-  ngOnInit(): void {
-  }
+  constructor(
+    private backend: BackendService,
+    private authService: AuthService
+  ) {}
 
+  ngOnInit(): void {}
 
-
-  saveThread(){
-    console.log('inputfield clicked');
-    this.thread.creator = 'Udo';
-    this.thread.date = Date.now();
+  saveThread() {
+    this.thread.creator = this.authService.userName.firstName + ' ' + this.authService.userName.lastName;
+    this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveThread(this.thread);
-    //this.backend.getUserIdFromLocalStorage();
   }
 
 
