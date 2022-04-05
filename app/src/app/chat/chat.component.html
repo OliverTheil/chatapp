@@ -1,17 +1,22 @@
 <section class="message-box" *ngFor="let thread of backend.allThreads">
-    <div class="message">
-        <div class="message__user__div">
-            <img class="message__user__img" src="https://avatars.dicebear.com/api/bottts/: example1 .svg" />
-            <div class="message__user__info">
-                <p class="message__username">{{ thread.creator }}</p>
-                <p class="message__time">at: TIME</p>
-            </div>
-        </div>
-        <div class="message__user__text">
-            {{ thread.text }}
-        </div>
-        <div>
-            <p (click)="changeState(thread.threatID)" class="highlighted">React</p>
-        </div>
+  <div class="message">
+    <div class="message__user__div">
+      <img
+        class="message__user__img"
+        src="https://avatars.dicebear.com/api/bottts/: {{
+          thread.creator
+        }} .svg"
+      />
+      <div class="message__user__info">
+        <p class="message__username">{{ thread.creator }}</p>
+        <p class="message__time">at: TIME</p>
+      </div>
     </div>
+    <div class="message__user__text">
+      {{ thread.text }}
+    </div>
+    <div class="message__react__div">
+      <p (click)="changeState(thread.threatID)" class="highlighted">React</p>
+    </div>
+  </div>
 </section>
