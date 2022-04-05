@@ -4,6 +4,8 @@ import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserName } from 'src/models/username.class';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-main',
@@ -15,10 +17,15 @@ export class MainComponent implements OnInit {
   openMobileState: boolean = false;
   subscription: Subscription;
   channelID: string;
-  constructor(private data: DataService, private backend:BackendService) {}
+
+  userId = '';
+  username: UserName = new UserName();
+
+
+  constructor(private data: DataService, private backend: BackendService, private route: ActivatedRoute, public afs: AngularFirestore) { }
 
   ngOnInit() {
-    
+
     this.subscription = this.data.currentState.subscribe(
       (openState) => (this.openState = openState)
     );
@@ -26,7 +33,9 @@ export class MainComponent implements OnInit {
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-      this.backend.setAllChannels();
+    this.backend.setAllChannels();
+    this.getUserId();
+    this.getUserName()
   }
 
   changeMobileState() {
@@ -39,5 +48,29 @@ export class MainComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  getUserId() {
+    this.route.paramMap.subscribe(paramMap => {
+      this.userId = paramMap.get('id');
+    })
+
+    console.log('ID', this.userId)
+    this.getUserName();
+
+
+  }
+
+  getUserName() {
+
+    this.afs
+      .collection('users')
+      .doc(this.userId)
+      .valueChanges()
+      .subscribe(() => {
+        this.username = new UserName(this.username)
+
+      })
+
   }
 }

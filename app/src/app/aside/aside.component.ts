@@ -25,9 +25,8 @@ export class AsideComponent implements OnInit {
   openMobileState = false;
   subscription: Subscription;
   allChannels = [];
-  userId = '';
-  username: UserName = new UserName();
-  constructor(private route: ActivatedRoute, public afs: AngularFirestore, public authService: AuthService, public router: Router, private data: DataService, public backend: BackendService) {
+  username: UserName;
+  constructor(public router: Router, private data: DataService, public backend: BackendService) {
 
   }
 

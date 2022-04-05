@@ -4,6 +4,7 @@ import { Thread } from 'src/models/thread.class';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { UserName } from 'src/models/username.class';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,9 @@ export class BackendService {
   public allThreads: any;
   channelID: string;
 
-  userId = '';
 
   constructor(
     private firestore: AngularFirestore,
-    private route: ActivatedRoute,
     private router: Router
   ) {
     this.setAllChannels();
@@ -101,26 +100,6 @@ export class BackendService {
         console.log('message saved:', result);
       })
   }
-
-  getUserName() {
-    let name;
-    name = this.firestore
-      .collection('users')
-      .doc(this.userId)
-      .get()
-  }
-
-  getUserId() {
-    this.route.paramMap.subscribe(paramMap => {
-      this.userId = paramMap.get('id');
-    })
-
-    console.log('ID', this.userId)
-    this.getUserName();
-
-
-  }
-
 
 
   getUserIdFromLocalStorage() {

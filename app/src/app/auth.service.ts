@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import * as firebase from 'firebase/compat';
 import { resourceLimits } from 'worker_threads';
+import { BackendService } from './backend.service';
 
 
 @Injectable({
@@ -22,7 +23,8 @@ export class AuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public backend: BackendService
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -47,10 +49,12 @@ export class AuthService {
         });
         this.SetUserData(result.user);
 
+
       })
       .catch((error) => {
         window.alert(error.message);
       });
+
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
