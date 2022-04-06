@@ -127,8 +127,8 @@ export class BackendService {
   getActualDateFormat(timeInMiliseconds) {
     let inputTime = new Date(timeInMiliseconds);
     let year = inputTime.getFullYear();
-    let month = inputTime.getMonth();
-    let day = inputTime.getDay();
+    let month = inputTime.getMonth() + 1;
+    let day = inputTime.getDate();
     let hrs = inputTime.getHours();
     let mins = inputTime.getMinutes();
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
