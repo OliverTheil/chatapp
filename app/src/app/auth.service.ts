@@ -32,7 +32,9 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
-        this.setUserNameFromFirebase();
+        if (this.userData.firstName != 'Guest') {
+          this.setUserNameFromFirebase();
+        }
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -59,6 +61,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
+        this.router.navigate(['/main/' + result.user.uid]);
       });
   }
 
@@ -90,7 +93,8 @@ export class AuthService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        this.router.navigate(['/main/' + this.userData.user.uid]);
+        this.SetUserData(res.user);
+        this.router.navigate(['/main/' + res.user.uid]);
       }
     });
   }
@@ -100,7 +104,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['main' + result.user.uid]);
+          this.router.navigate(['/main/' + result.user.uid]);
         });
         this.SetUserData(result.user);
       })
@@ -138,6 +142,7 @@ export class AuthService {
       .doc(user.uid)
       .set({
         userData,
+        assignedChannel: [],
         Firstname: this.userName.firstName,
         Lastname: this.userName.lastName,
       })
@@ -156,17 +161,12 @@ export class AuthService {
       emailVerified: user.emailVerified,
     };
 
-    return this.afs
-      .collection('users')
-      .doc(user.uid)
-      .set({
-        userData,
-        Firstname: 'Guest',
-        Lastname: 'Account',
-      })
-      .then(() => {
-        console.log(this.userName.firstName);
-      });
+    return this.afs.collection('users').doc(user.uid).set({
+      userData,
+      assignedChannel: [],
+      Firstname: 'Guest',
+      Lastname: 'Account',
+    });
   }
 
   // Sign out

@@ -5,9 +5,7 @@
       *ngIf="auth.user | async as user; else showLogin"
     >
       <h1 #showHello>Hello {{ user.displayName || userName.firstName }}!</h1>
-      <button [routerLink]="'/main/' + authService.userData.uid">
-        To your chats
-      </button>
+      <button (click)="routeToChats()">To your chats</button>
       <button (click)="logout()">Logout</button>
     </div>
     <ng-template #showLogin>
@@ -29,7 +27,7 @@
       <button (click)="authService.SignIn(userName.value, userPassword.value)">
         Login with email
       </button>
-      <button (click)="authService.GoogleAuth()">Login with Google</button>
+      <!-- <button (click)="authService.GoogleAuth()">Login with Google</button> -->
       <button routerLink="/signup">Create a new account</button>
       <button (click)="loginGuest()">Or login as guest</button>
     </ng-template>

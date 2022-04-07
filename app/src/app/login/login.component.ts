@@ -17,7 +17,11 @@ export class LoginComponent implements OnInit {
   password: string = '';
   userName = new UserName();
 
-  constructor(public auth: AngularFireAuth, public authService: AuthService) {}
+  constructor(
+    public auth: AngularFireAuth,
+    public authService: AuthService,
+    public router: Router
+  ) {}
   ngOnInit(): void {}
 
   loginGuest() {
@@ -26,6 +30,10 @@ export class LoginComponent implements OnInit {
       'guest' + Math.random().toString().slice(2) + '@account.guest',
       Math.random().toString().slice(2)
     );
+  }
+
+  routeToChats() {
+    this.router.navigate(['/main/' + this.authService.userData.uid]);
   }
 
   logout() {

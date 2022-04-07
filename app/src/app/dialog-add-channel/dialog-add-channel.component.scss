@@ -1,34 +1,35 @@
 .create-channel {
-    width: 100vw;
-    max-width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100vw;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-channel-window {
-    margin: 16px;
-    background: rgba(53, 53, 53, 0.863);
-    max-height: 600px;
-    max-width: 400px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    button {
-        width: 260px;
-    }
-    input {
-        width: 244px;
-    }
-    p {
-        padding: 16px;
-    }
-    h1 {
-        font-weight: 400;
-        font-size: 2.4rem;
-        text-align: center;
-    }
+  margin: 16px;
+  background: rgba(53, 53, 53, 0.863);
+  max-height: 600px;
+  max-width: 400px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  button {
+    width: 260px;
+  }
+  input {
+    width: 244px;
+  }
+  p {
+    padding: 16px;
+  }
+  h1 {
+    font-weight: 400;
+    font-size: 2.4rem;
+    text-align: center;
+  }
 }

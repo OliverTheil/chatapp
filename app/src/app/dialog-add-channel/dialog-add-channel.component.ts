@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
-
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-dialog-add-channel',
   templateUrl: './dialog-add-channel.component.html',
@@ -10,19 +10,27 @@ import { BackendService } from '../backend.service';
 export class DialogAddChannelComponent implements OnInit {
   channelName: string;
   channelNameAdd: string;
-  constructor(public backend: BackendService, public router: Router) {}
+  constructor(
+    public backend: BackendService,
+    public router: Router,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
   createChannel() {
     console.log('create Channel Dialog:', this.channelName);
-
     this.backend.createChannel(this.channelName);
+    this.backToChat();
   }
 
   abort() {}
 
   addChannel(channelID) {
     console.log('adChannel channelID: ', channelID);
-    this.router.navigate(['/main/']);
+    this.backToChat();
+  }
+
+  backToChat() {
+    this.router.navigate(['/main/' + this.authService.userData.uid]);
   }
 }

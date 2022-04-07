@@ -35,7 +35,8 @@ input {
   @extend .boxShadow;
 }
 
-button {
+button,
+.channel__select {
   margin: 16px;
   padding: 16px;
   border: transparent;
@@ -82,6 +83,10 @@ section {
 
 .font--18 {
   font-size: 1.8rem;
+}
+
+.font--16 {
+  font-size: 1.6rem;
 }
 
 .fixed {
