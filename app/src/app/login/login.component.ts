@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   loginGuest() {
-    this.auth.signInAnonymously();
+    // this.auth.signInAnonymously();
     this.authService.SignUpAsGuest(
       'guest' + Math.random().toString().slice(2) + '@account.guest',
       Math.random().toString().slice(2)
