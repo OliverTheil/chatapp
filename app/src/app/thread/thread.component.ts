@@ -43,6 +43,7 @@ export class ThreadComponent implements OnInit {
       this.authService.userName.firstName +
       ' ' +
       this.authService.userName.lastName;
+      this.thread.dateInMs = Date.now();
     this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveMessage(this.thread);
     this.clear = '';

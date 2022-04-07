@@ -4,14 +4,14 @@ export class Thread {
     text!: string;
     creator!: string;
     date!: string;
-
+    dateInMs!: number;
     
     constructor(obj?: any) {
       this.imgUrl = obj ? obj.imgUrl : '';
       this.text = obj ? obj.text : '';
       this.creator = obj ? obj.creator : '';
       this.date = obj ? obj.date : '';
-      
+      this.dateInMs = obj ? obj.dateInMs : '';
     }
   
     public toJson() {
@@ -20,7 +20,7 @@ export class Thread {
         text: this.text,
         creator: this.creator,
         date: this.date,
-        
+        dateInMs: this.dateInMs
       };
     }
   }

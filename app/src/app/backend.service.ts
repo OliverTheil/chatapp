@@ -21,6 +21,7 @@ export class BackendService {
   thread = new Thread(this.threadValues);
   actualChannel: string;
   actualThread: string;
+  public allExistsChannels: any;
   public allChannels: any;
   public allMessages: any;
   public allThreads: any;
@@ -28,18 +29,27 @@ export class BackendService {
   channelID: string;
 
   constructor(private firestore: AngularFirestore, private router: Router) {
-    this.setAllChannels();
+    
   }
 
-  async setAllChannels() {
+  async setAllChannels(actualUser) {
     this.firestore
       .collection('channels')
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
-        this.allChannels = changes;
-        changes.forEach((element) => {});
-      });
+        this.allExistsChannels = changes;
+        this.allChannels= [];
+        this.assignedChannel=[];
+        changes.forEach((element) => {
+            for (let i = 0; i< actualUser['assignedChannel'].length; i++){
+               if (actualUser['assignedChannel'][i] == element['channelID']){
+                this.allChannels.push(element);
+                this.assignedChannel.push(element['channelID']);
+              }}
+         });
+        })
   }
+
 
   subscribeChannel(userID, channelID) {
     if (!this.assignedChannel.includes(channelID)) {
@@ -60,6 +70,12 @@ export class BackendService {
       .valueChanges({ idField: 'threatID' })
       .subscribe((changes: any) => {
         this.allThreads = changes;
+        console.log('setAllThreads', changes, typeof(changes));
+
+
+
+
+
       });
   }
 
@@ -73,7 +89,6 @@ export class BackendService {
       .valueChanges({ idField: 'messageID' })
       .subscribe((changesmessages: any) => {
         this.allMessages = changesmessages;
-
         changesmessages.forEach((element) => {});
       });
   }

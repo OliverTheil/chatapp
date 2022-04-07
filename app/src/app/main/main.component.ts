@@ -6,6 +6,7 @@ import { BackendService } from '../backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-main',
@@ -21,7 +22,7 @@ export class MainComponent implements OnInit {
 
 
 
-  constructor(private data: DataService, private backend: BackendService, private route: ActivatedRoute, public afs: AngularFirestore) { }
+  constructor(private authService: AuthService, private data: DataService, private backend: BackendService, private route: ActivatedRoute, public afs: AngularFirestore) { }
 
   ngOnInit() {
 
@@ -32,7 +33,7 @@ export class MainComponent implements OnInit {
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-    this.backend.setAllChannels();
+    // this.backend.setAllChannels();
 
   }
 
