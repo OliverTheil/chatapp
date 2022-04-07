@@ -1,41 +1,45 @@
 <section class="thread">
-    <div class="thread__head fixed">
-        <p>Thread</p>
-        <i (click)="changeState()" class="close fa-solid fa-xmark"></i>
-    </div>
-    <div class="thread__messages">
-
-
-        <section class="message-box" *ngFor="let message of backend.allMessages">
-            <div class="message">
-                <div class="message__user__div">
-                    <img class="message__user__img" src="https://avatars.dicebear.com/api/bottts/: example1 .svg" />
-                    <div class="message__user__info">
-                        <p class="message__username">{{ message.creator }}</p>
-                        <p class="message__time">at: {{ message.date }}</p>
-                    </div>
-                </div>
-                <div class="message__user__text">
-                    {{ message.text }}
-                </div>
-
-            </div>
-        </section>
-
-
-
-
-
-    </div>
-    <section class="thread__inputfield fixed">
-        <textarea [(ngModel)]="thread.text" class="inputfield__textarea" name="" id="" cols="100" rows="6"></textarea>
-        <div class="inputfield__buttons">
-            <i class="fa-solid fa-plus"></i>
-            <i class="fa-solid fa-at"></i>
-            <i class="fa-solid fa-bold"></i>
-            <i class="fa-solid fa-italic"></i>
-            <i class="fa-solid fa-code"></i>
-            <i class="fa-solid fa-paper-plane" (click)="saveMessage()"></i>
+  <div class="thread__head fixed">
+    <p>Thread</p>
+    <i (click)="changeState()" class="close fa-solid fa-xmark"></i>
+  </div>
+  <div class="thread__messages">
+    <section class="message-box" *ngFor="let message of backend.allMessages">
+      <div class="message">
+        <div class="message__user__div">
+          <img
+            class="message__user__img"
+            src="https://avatars.dicebear.com/api/bottts/:{{
+              message.creator
+            }}.svg"
+          />
+          <div class="message__user__info">
+            <p class="message__username">{{ message.creator }}</p>
+            <p class="message__time">at: {{ message.date }}</p>
+          </div>
         </div>
+        <div class="message__user__text">
+          {{ message.text }}
+        </div>
+      </div>
     </section>
+  </div>
+  <section class="thread__inputfield fixed">
+    <textarea
+      [(ngModel)]="thread.text"
+      class="inputfield__textarea"
+      name=""
+      id=""
+      cols="100"
+      rows="6"
+    ></textarea>
+    <div class="inputfield__buttons">
+      <i class="fa-solid fa-plus"></i>
+      <i class="fa-solid fa-at"></i>
+      <i class="fa-solid fa-bold"></i>
+      <i class="fa-solid fa-italic"></i>
+      <i class="fa-solid fa-code"></i>
+      <i class="fa-solid fa-paper-plane" (click)="saveMessage()"></i>
+    </div>
+  </section>
 </section>

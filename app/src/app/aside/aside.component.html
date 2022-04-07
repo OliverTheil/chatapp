@@ -7,14 +7,18 @@
   ></i>
   <section class="aside__section">
     <div (click)="openUserEdit()" class="aside__section__user__div">
-      <span>{{ AuthService.userName.firstName }}</span>
+      <span>{{
+        AuthService.userName.firstName + " " + AuthService.userName.lastName
+      }}</span>
       <img
         class="aside__section__user__img"
-        src="https://avatars.dicebear.com/api/bottts/: example .svg"
+        src="https://avatars.dicebear.com/api/bottts/:{{
+          AuthService.userName.firstName + ' ' + AuthService.userName.lastName
+        }}.svg"
       />
     </div>
   </section>
-  <section class="aside__section">
+  <!-- <section class="aside__section">
     <div class="aside__section__heading">
       <p>Favourites</p>
       <i
@@ -33,7 +37,7 @@
         <p class="font--18">add favourite</p>
       </div>
     </div>
-  </section>
+  </section> -->
   <section class="aside__section">
     <div class="aside__section__heading">
       <p>Channels</p>
@@ -72,24 +76,26 @@
     <div [class.hide]="hideDirects" class="aside__section__group">
       <div class="aside__section__channel__div">
         <i class="fa-solid fa-user-large"></i>
-        <p>Alex</p>
+        <p>In</p>
       </div>
       <div class="aside__section__channel__div">
         <i class="fa-solid fa-user-large"></i>
-        <p>Tobi</p>
+        <p>Progress</p>
       </div>
       <div class="aside__section__channel__div">
         <i class="fa-solid fa-user-large"></i>
-        <p>Hans</p>
+        <p>...</p>
       </div>
     </div>
   </section>
   <section *ngIf="userClicked" class="aside__section userEdit fixed z--1">
     <div class="userEdit__head">
-      <p>USERNAME</p>
+      <p>{{ AuthService.userName.firstName }}</p>
       <img
         class="aside__section__user__img"
-        src="https://avatars.dicebear.com/api/bottts/: example .svg"
+        src="https://avatars.dicebear.com/api/bottts/:{{
+          AuthService.userName.firstName + ' ' + AuthService.userName.lastName
+        }}.svg"
       />
     </div>
     <button (click)="logout()">Logout</button>

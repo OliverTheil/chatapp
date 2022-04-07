@@ -12,15 +12,17 @@ import { AuthService } from '../auth.service';
 export class ThreadComponent implements OnInit {
   openState: boolean = true;
   subscription: Subscription;
-  thread = new Thread;
-  constructor(private authService: AuthService, private data: DataService, public backend: BackendService) {}
+  thread = new Thread();
+  constructor(
+    private authService: AuthService,
+    private data: DataService,
+    public backend: BackendService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.data.currentState.subscribe(
       (openState) => (this.openState = openState)
     );
-
-
   }
 
   changeState() {
@@ -35,11 +37,12 @@ export class ThreadComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  saveMessage(){
-    this.thread.creator = this.authService.userName.firstName + ' ' + this.authService.userName.lastName;;
+  saveMessage() {
+    this.thread.creator =
+      this.authService.userName.firstName +
+      ' ' +
+      this.authService.userName.lastName;
     this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveMessage(this.thread);
   }
-
-
 }
