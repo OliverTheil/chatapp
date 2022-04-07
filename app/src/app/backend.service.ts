@@ -24,6 +24,7 @@ export class BackendService {
   public allChannels: any;
   public allMessages: any;
   public allThreads: any;
+  public assignedChannel: any = [];
   channelID: string;
 
   constructor(private firestore: AngularFirestore, private router: Router) {
@@ -41,12 +42,13 @@ export class BackendService {
   }
 
   subscribeChannel(userID, channelID) {
-    console.log('USERID', userID);
-    console.log('CHANNELID', channelID);
-    this.firestore
-      .collection('users')
-      .doc(userID)
-      .update({ assignedChannel: channelID });
+    if (!this.assignedChannel.includes(channelID)) {
+      this.assignedChannel.push(channelID);
+      this.firestore
+        .collection('users')
+        .doc(userID)
+        .update({ assignedChannel: this.assignedChannel });
+    }
   }
 
   async setAllThreats() {

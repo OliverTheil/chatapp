@@ -4,7 +4,7 @@
       class="login__window__auth"
       *ngIf="auth.user | async as user; else showLogin"
     >
-      <h1 #showHello>Hello {{ user.displayName || userName.firstName }}!</h1>
+      <h1 #showHello>Hello {{ authService.userName.firstName }}!</h1>
       <button (click)="routeToChats()">To your chats</button>
       <button (click)="logout()">Logout</button>
     </div>

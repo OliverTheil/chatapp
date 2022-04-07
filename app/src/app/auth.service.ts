@@ -68,6 +68,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetGuestData(result.user);
+        this.router.navigate(['/main/' + result.user.uid]);
       });
   }
 
@@ -176,15 +177,13 @@ export class AuthService {
   }
 
   setUserNameFromFirebase() {
-    if (this.userName.firstName != 'Guest') {
-      this.afs
-        .collection('users')
-        .doc(this.userData.uid)
-        .valueChanges()
-        .subscribe((userChanges: any) => {
-          this.userName.firstName = userChanges['Firstname'];
-          this.userName.lastName = userChanges['Lastname'];
-        });
-    }
+    this.afs
+      .collection('users')
+      .doc(this.userData.uid)
+      .valueChanges()
+      .subscribe((userChanges: any) => {
+        this.userName.firstName = userChanges['Firstname'];
+        this.userName.lastName = userChanges['Lastname'];
+      });
   }
 }

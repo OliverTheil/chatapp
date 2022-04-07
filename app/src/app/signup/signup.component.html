@@ -5,11 +5,13 @@
       [(ngModel)]="authService.userName.firstName"
       placeholder="firstname"
       type="text"
+      required
     />
     <input
       [(ngModel)]="authService.userName.lastName"
       placeholder="lastname"
       type="text"
+      required
     />
     <input placeholder="email" type="text" #userMail required />
     <input placeholder="password" type="password" #userPassword required />
