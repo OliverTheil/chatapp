@@ -12,16 +12,20 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   title = 'slacktest';
+
   email: string = '';
   password: string = '';
   userName = new UserName();
 
-  constructor(public auth: AngularFireAuth, public authService: AuthService) { }
-  ngOnInit(): void { }
-
+  constructor(public auth: AngularFireAuth, public authService: AuthService) {}
+  ngOnInit(): void {}
 
   loginGuest() {
     this.auth.signInAnonymously();
+    this.authService.SignUpAsGuest(
+      'guest' + Math.random().toString().slice(2) + '@account.guest',
+      Math.random().toString().slice(2)
+    );
   }
 
   logout() {

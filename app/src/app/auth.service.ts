@@ -38,7 +38,6 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-    
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -59,21 +58,18 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
-  up and returns promise */
-        this.SendVerificationMail();
         this.SignUpUserData(result.user);
       });
   }
 
-  // Send email verfificaiton when new user sign up
-  SendVerificationMail() {
-    return this.afAuth.currentUser
-      .then((u: any) => u.sendEmailVerification())
-      .then(() => {
-        this.router.navigate(['verify-email']);
+  SignUpAsGuest(email: string, password: string) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.SetGuestData(result.user);
       });
   }
+
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
     return this.afAuth
@@ -128,7 +124,7 @@ export class AuthService {
   }
 
   SignUpUserData(user: any) {
-    console.log('SignUpUserData',user);
+    console.log('SignUpUserData', user);
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -150,6 +146,29 @@ export class AuthService {
       });
   }
 
+  SetGuestData(user: any) {
+    console.log('SignUpUserData', user);
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+
+    return this.afs
+      .collection('users')
+      .doc(user.uid)
+      .set({
+        userData,
+        Firstname: 'Guest',
+        Lastname: 'Account',
+      })
+      .then(() => {
+        console.log(this.userName.firstName);
+      });
+  }
+
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
@@ -158,16 +177,14 @@ export class AuthService {
     });
   }
 
-  
-  setUserNameFromFirebase(){
+  setUserNameFromFirebase() {
     this.afs
-    .collection('users')
-    .doc(this.userData.uid)
-    .valueChanges()
-    .subscribe((userChanges: any) => {
-      this.userName.firstName = userChanges['Firstname'];
-      this.userName.lastName = userChanges['Lastname'];
-    });
+      .collection('users')
+      .doc(this.userData.uid)
+      .valueChanges()
+      .subscribe((userChanges: any) => {
+        this.userName.firstName = userChanges['Firstname'];
+        this.userName.lastName = userChanges['Lastname'];
+      });
   }
-
 }

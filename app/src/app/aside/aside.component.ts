@@ -8,6 +8,7 @@ import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { User, user } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-aside',
@@ -35,20 +36,19 @@ export class AsideComponent implements OnInit {
     public backend: BackendService,
     public AuthService: AuthService,
     private route: ActivatedRoute,
-  ) { }
+    public auth: AngularFireAuth,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.data.currentMobileState.subscribe(
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-    this.route.paramMap.subscribe(paramMap => {
+    this.route.paramMap.subscribe((paramMap) => {
       this.userId = paramMap.get('id');
-    })
+    });
     this.getUserName();
-
-
-
   }
 
   getUserName() {
@@ -57,16 +57,12 @@ export class AsideComponent implements OnInit {
       .doc(this.userId)
       .valueChanges()
       .subscribe((username) => {
-        this.username = new UserName(username)
-        this.username.firstName
-      })
-
+        this.username = new UserName(username);
+        this.username.firstName;
+      });
   }
 
-
-
-
-  openDialogAddChannel() { }
+  openDialogAddChannel() {}
 
   changeMobileState() {
     if (!this.openMobileState) {
@@ -134,6 +130,11 @@ export class AsideComponent implements OnInit {
 
   openChannel(id: string) {
     this.router.navigate(['/main/' + id]);
+  }
+
+  logout() {
+    this.auth.signOut();
+    this.router.navigate(['']);
   }
   // getUserData() {
 

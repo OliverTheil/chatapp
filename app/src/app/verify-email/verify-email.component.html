@@ -1,9 +1,12 @@
 <div>
-    <div class="formGroup" *ngIf="authService.userData as user">
-        <h1> Thank you for Registration</h1>
-        <p>We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
-    </div>
+  <div class="formGroup" *ngIf="authService.userData as user">
+    <h1>Thank you for Registration</h1>
+    <p>
+      We have sent a confirmation email to <strong>{{ user.email }}</strong
+      >.
+    </p>
+  </div>
 
-    <button type="button" (click)="authService.SendVerificationMail()">Resend Verification Email</button>
+  <button type="button">Resend Verification Email</button>
 </div>
 <a class="redirect" (click)="authService.SignOut()"> Go Back</a>
