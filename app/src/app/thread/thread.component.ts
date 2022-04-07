@@ -13,6 +13,7 @@ export class ThreadComponent implements OnInit {
   openState: boolean = true;
   subscription: Subscription;
   thread = new Thread();
+  clear: '';
   constructor(
     private authService: AuthService,
     private data: DataService,
@@ -44,5 +45,6 @@ export class ThreadComponent implements OnInit {
       this.authService.userName.lastName;
     this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveMessage(this.thread);
+    this.clear = '';
   }
 }

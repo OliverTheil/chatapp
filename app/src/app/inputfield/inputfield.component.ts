@@ -11,6 +11,7 @@ import { BackendService } from '../backend.service';
 })
 export class InputfieldComponent implements OnInit {
   thread = new Thread();
+  clear: '';
 
   constructor(
     private backend: BackendService,
@@ -20,10 +21,12 @@ export class InputfieldComponent implements OnInit {
   ngOnInit(): void {}
 
   saveThread() {
-    this.thread.creator = this.authService.userName.firstName + ' ' + this.authService.userName.lastName;
+    this.thread.creator =
+      this.authService.userName.firstName +
+      ' ' +
+      this.authService.userName.lastName;
     this.thread.date = this.backend.getActualDateFormat(Date.now());
     this.backend.saveThread(this.thread);
+    this.clear = '';
   }
-
-
 }
