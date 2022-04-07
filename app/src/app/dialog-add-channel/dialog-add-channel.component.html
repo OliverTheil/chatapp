@@ -9,6 +9,7 @@
     <div class="create-channel-window">
       <h1>Subscribe a channel</h1>
       <select
+        #channelOptions
         name="Channels"
         [(ngModel)]="channelNameAdd"
         class="channel__select"
@@ -20,7 +21,7 @@
           {{ channel.channelName }}
         </option>
       </select>
-      <button (click)="addChannel(channelNameAdd)">Subscribe</button>
+      <button (click)="addChannel(channelOptions.value)">Subscribe</button>
     </div>
   </div>
 </section>

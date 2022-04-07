@@ -32,9 +32,7 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
-        if (this.userData.firstName != 'Guest') {
-          this.setUserNameFromFirebase();
-        }
+        this.setUserNameFromFirebase();
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
@@ -178,13 +176,15 @@ export class AuthService {
   }
 
   setUserNameFromFirebase() {
-    this.afs
-      .collection('users')
-      .doc(this.userData.uid)
-      .valueChanges()
-      .subscribe((userChanges: any) => {
-        this.userName.firstName = userChanges['Firstname'];
-        this.userName.lastName = userChanges['Lastname'];
-      });
+    if (this.userName.firstName != 'Guest') {
+      this.afs
+        .collection('users')
+        .doc(this.userData.uid)
+        .valueChanges()
+        .subscribe((userChanges: any) => {
+          this.userName.firstName = userChanges['Firstname'];
+          this.userName.lastName = userChanges['Lastname'];
+        });
+    }
   }
 }

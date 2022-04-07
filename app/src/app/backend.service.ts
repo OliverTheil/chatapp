@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from './auth.service';
+import { user } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +26,7 @@ export class BackendService {
   public allThreads: any;
   channelID: string;
 
-
-  constructor(
-    private firestore: AngularFirestore,
-    private router: Router
-  ) {
+  constructor(private firestore: AngularFirestore, private router: Router) {
     this.setAllChannels();
   }
 
@@ -39,8 +36,17 @@ export class BackendService {
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        changes.forEach((element) => { });
+        changes.forEach((element) => {});
       });
+  }
+
+  subscribeChannel(userID, channelID) {
+    console.log('USERID', userID);
+    console.log('CHANNELID', channelID);
+    this.firestore
+      .collection('users')
+      .doc(userID)
+      .update({ assignedChannel: channelID });
   }
 
   async setAllThreats() {
@@ -65,24 +71,22 @@ export class BackendService {
       .valueChanges({ idField: 'messageID' })
       .subscribe((changesmessages: any) => {
         this.allMessages = changesmessages;
-  
-        changesmessages.forEach((element) => { 
-         });
+
+        changesmessages.forEach((element) => {});
       });
   }
 
-
-  getUserNameFromFirebase(id){
+  getUserNameFromFirebase(id) {
     let returnName: string;
     this.firestore
-    .collection('users')
-    .doc(id)
-    .valueChanges()
-    .subscribe((userChanges: any) => {
-      returnName = userChanges['Firstname'] + ' ' + userChanges['Lastname'];
-        });
-        console.log('get_User:', returnName);
-    return returnName
+      .collection('users')
+      .doc(id)
+      .valueChanges()
+      .subscribe((userChanges: any) => {
+        returnName = userChanges['Firstname'] + ' ' + userChanges['Lastname'];
+      });
+    console.log('get_User:', returnName);
+    return returnName;
   }
 
   createChannel(channelName: string) {
@@ -96,13 +100,12 @@ export class BackendService {
   }
 
   saveThread(thread) {
-
     this.firestore
       .collection('channels')
       .doc(this.channelID)
       .collection('Threads')
       .add(thread.toJson())
-      .then((result: any) => { });
+      .then((result: any) => {});
   }
 
   saveMessage(message) {
@@ -115,13 +118,12 @@ export class BackendService {
       .add(message.toJson())
       .then((result: any) => {
         console.log('message saved:', result);
-      })
+      });
   }
-
 
   getUserIdFromLocalStorage() {
     let user = JSON.parse(localStorage.getItem('user'));
-    return user['uid']; 
+    return user['uid'];
   }
 
   getActualDateFormat(timeInMiliseconds) {
@@ -133,5 +135,4 @@ export class BackendService {
     let mins = inputTime.getMinutes();
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }
-
 }

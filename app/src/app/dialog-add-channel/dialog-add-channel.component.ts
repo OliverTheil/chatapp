@@ -10,6 +10,8 @@ import { AuthService } from '../auth.service';
 export class DialogAddChannelComponent implements OnInit {
   channelName: string;
   channelNameAdd: string;
+  userID: string = this.authService.userData.uid;
+
   constructor(
     public backend: BackendService,
     public router: Router,
@@ -27,6 +29,7 @@ export class DialogAddChannelComponent implements OnInit {
 
   addChannel(channelID) {
     console.log('adChannel channelID: ', channelID);
+    this.backend.subscribeChannel(this.userID, channelID);
     this.backToChat();
   }
 
