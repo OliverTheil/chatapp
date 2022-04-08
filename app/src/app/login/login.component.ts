@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   routeToChats() {
-    this.router.navigate(['/main/' + this.authService.userData.uid]);
+    this.router.navigate(['/chat/' + this.authService.userData.uid]);
   }
 
   logout() {

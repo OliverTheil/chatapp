@@ -34,6 +34,6 @@ export class DialogAddChannelComponent implements OnInit {
   }
 
   backToChat() {
-    this.router.navigate(['/main/' + this.authService.userData.uid]);
+    this.router.navigate(['/chat/' + this.authService.userData.uid]);
   }
 }

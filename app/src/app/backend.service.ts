@@ -105,7 +105,7 @@ export class BackendService {
       .add({ createdOn: Date.now(), channelName: channelName })
       .then((result: any) => {
         this.actualChannel = result.id;
-        this.router.navigate(['/main/' + this.actualChannel]);
+        this.router.navigate(['/chat/' + this.actualChannel]);
       });
   }
 

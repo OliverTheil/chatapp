@@ -129,7 +129,7 @@ export class AsideComponent implements OnInit {
   }
 
   openChannel(id: string) {
-    this.router.navigate(['/main/' + id]);
+    this.router.navigate(['/chat/' + id]);
   }
 
   logout() {

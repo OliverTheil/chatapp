@@ -45,7 +45,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/main/' + result.user.uid]);
+          this.router.navigate(['/chat/' + result.user.uid]);
         });
         this.SetUserData(result.user);
       })
@@ -59,7 +59,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
-        this.router.navigate(['/main/' + result.user.uid]);
+        this.router.navigate(['/chat/' + result.user.uid]);
       });
   }
 
@@ -68,7 +68,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetGuestData(result.user);
-        this.router.navigate(['/main/' + result.user.uid]);
+        this.router.navigate(['/chat/' + result.user.uid]);
       });
   }
 
@@ -93,7 +93,7 @@ export class AuthService {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
         this.SetUserData(res.user);
-        this.router.navigate(['/main/' + res.user.uid]);
+        this.router.navigate(['/chat/' + res.user.uid]);
       }
     });
   }
@@ -103,7 +103,7 @@ export class AuthService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/main/' + result.user.uid]);
+          this.router.navigate(['/chat/' + result.user.uid]);
         });
         this.SetUserData(result.user);
       })

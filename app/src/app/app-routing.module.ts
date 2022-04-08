@@ -8,15 +8,14 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'main/:id', component: MainComponent },
+  { path: 'chat/:id', component: MainComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'create-channel', component: DialogAddChannelComponent },
-  
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
