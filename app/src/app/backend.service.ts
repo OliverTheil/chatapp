@@ -28,9 +28,7 @@ export class BackendService {
   public assignedChannel: any = [];
   channelID: string;
 
-  constructor(private firestore: AngularFirestore, private router: Router) {
-    
-  }
+  constructor(private firestore: AngularFirestore, private router: Router) {}
 
   async setAllChannels(actualUser) {
     this.firestore
@@ -38,18 +36,18 @@ export class BackendService {
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
         this.allExistsChannels = changes;
-        this.allChannels= [];
-        this.assignedChannel=[];
+        this.allChannels = [];
+        this.assignedChannel = [];
         changes.forEach((element) => {
-            for (let i = 0; i< actualUser['assignedChannel'].length; i++){
-               if (actualUser['assignedChannel'][i] == element['channelID']){
-                this.allChannels.push(element);
-                this.assignedChannel.push(element['channelID']);
-              }}
-         });
-        })
+          for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
+            if (actualUser['assignedChannel'][i] == element['channelID']) {
+              this.allChannels.push(element);
+              this.assignedChannel.push(element['channelID']);
+            }
+          }
+        });
+      });
   }
-
 
   subscribeChannel(userID, channelID) {
     if (!this.assignedChannel.includes(channelID)) {
@@ -70,12 +68,7 @@ export class BackendService {
       .valueChanges({ idField: 'threatID' })
       .subscribe((changes: any) => {
         this.allThreads = changes;
-        console.log('setAllThreads', changes, typeof(changes));
-
-
-
-
-
+        console.log('setAllThreads', changes, typeof changes);
       });
   }
 
@@ -149,7 +142,9 @@ export class BackendService {
     let month = inputTime.getMonth() + 1;
     let day = inputTime.getDate();
     let hrs = inputTime.getHours();
-    let mins = inputTime.getMinutes();
+    let mins: any = inputTime.getMinutes();
+    mins = String(inputTime.getMinutes()).padStart(2, '0');
+    mins = mins <= 9 ? '0' + mins : mins;
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }
 }
