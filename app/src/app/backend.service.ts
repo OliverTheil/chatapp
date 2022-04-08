@@ -21,23 +21,31 @@ export class BackendService {
   thread = new Thread(this.threadValues);
   actualChannel: string;
   actualThread: string;
+  public allExistsChannels: any;
   public allChannels: any;
   public allMessages: any;
   public allThreads: any;
   public assignedChannel: any = [];
   channelID: string;
 
-  constructor(private firestore: AngularFirestore, private router: Router) {
-    this.setAllChannels();
-  }
+  constructor(private firestore: AngularFirestore, private router: Router) {}
 
-  async setAllChannels() {
+  async setAllChannels(actualUser) {
     this.firestore
       .collection('channels')
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
-        this.allChannels = changes;
-        changes.forEach((element) => {});
+        this.allExistsChannels = changes;
+        this.allChannels = [];
+        this.assignedChannel = [];
+        changes.forEach((element) => {
+          for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
+            if (actualUser['assignedChannel'][i] == element['channelID']) {
+              this.allChannels.push(element);
+              this.assignedChannel.push(element['channelID']);
+            }
+          }
+        });
       });
   }
 
@@ -60,6 +68,7 @@ export class BackendService {
       .valueChanges({ idField: 'threatID' })
       .subscribe((changes: any) => {
         this.allThreads = changes;
+        console.log('setAllThreads', changes, typeof changes);
       });
   }
 
@@ -73,7 +82,6 @@ export class BackendService {
       .valueChanges({ idField: 'messageID' })
       .subscribe((changesmessages: any) => {
         this.allMessages = changesmessages;
-
         changesmessages.forEach((element) => {});
       });
   }
@@ -134,7 +142,9 @@ export class BackendService {
     let month = inputTime.getMonth() + 1;
     let day = inputTime.getDate();
     let hrs = inputTime.getHours();
-    let mins = inputTime.getMinutes();
+    let mins: any = inputTime.getMinutes();
+    mins = String(inputTime.getMinutes()).padStart(2, '0');
+    mins = mins <= 9 ? '0' + mins : mins;
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }
 }

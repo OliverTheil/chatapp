@@ -1,27 +1,22 @@
 <section class="channel">
-  <div class="create-channel">
-    <div class="create-channel-window">
-      <h1>Create new Channel</h1>
-      <input [(ngModel)]="channelName" />
-      <button (click)="createChannel()">Create</button>
-    </div>
-    <div class="create-channel-window">
-      <h1>Subscribe a channel</h1>
-      <select
-        #channelOptions
-        name="Channels"
-        [(ngModel)]="channelNameAdd"
-        class="channel__select"
-      >
+    <div class="create-channel">
+        <div class="create-channel-window">
+            <h1>Create new Channel</h1>
+            <input [(ngModel)]="channelName" />
+            <button (click)="createChannel()">Create</button>
+        </div>
+        <div class="create-channel-window">
+            <h1>Subscribe a channel</h1>
+            <select #channelOptions name="Channels" [(ngModel)]="channelNameAdd" class="channel__select">
         <option
-          *ngFor="let channel of backend.allChannels"
+          *ngFor="let channel of backend.allExistsChannels"
           value="{{ channel.channelID }}"
         >
           {{ channel.channelName }}
         </option>
       </select>
-      <button (click)="addChannel(channelOptions.value)">Subscribe</button>
+            <button (click)="addChannel(channelOptions.value)">Subscribe</button>
+        </div>
+        <button (click)="backToChat()">abort</button>
     </div>
-    <button (click)="backToChat()">abort</button>
-  </div>
 </section>

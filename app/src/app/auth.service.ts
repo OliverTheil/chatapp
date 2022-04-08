@@ -184,6 +184,7 @@ export class AuthService {
       .subscribe((userChanges: any) => {
         this.userName.firstName = userChanges['Firstname'];
         this.userName.lastName = userChanges['Lastname'];
+        this.backend.setAllChannels(userChanges);
       });
   }
 }
