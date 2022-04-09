@@ -11,10 +11,13 @@
       </div>
     </div>
     <div class="message__user__text">
-      {{ thread.text }}
+      {{ thread.text }} 
+      <img [src]="thread.imgUrl" *ngIf="thread.imgUrl">
+     
     </div>
     <div class="message__react__div">
       <p (click)="changeState(thread.threatID)" class="highlighted">React</p>
+      
     </div>
   </div>
 </section>

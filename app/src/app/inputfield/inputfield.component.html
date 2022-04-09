@@ -6,10 +6,13 @@
     cols="100"
     rows="6"
     [(ngModel)]="clear"
+    
   ></textarea>
   <div class="inputfield__buttons">
     <div>
-      <i class="fa-solid fa-plus"></i>
+      <input type="file" class="file-input"
+       (change)="backend.onFileSelected($event)" #fileUpload>
+      <i (click)="fileUpload.click()"class="fa-solid fa-plus"></i>
       <i class="fa-solid fa-at"></i>
       <i class="fa-solid fa-bold"></i>
       <i class="fa-solid fa-italic"></i>

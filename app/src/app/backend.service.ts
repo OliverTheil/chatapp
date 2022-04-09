@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from './auth.service';
 import { user } from '@angular/fire/auth';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
   threadValues = {
-    imgUrl: 'url to Image 2',
+    imgUrl: '',
     text: 'text from thread',
     creator: 'Creator',
     date: Date.now(),
@@ -27,8 +28,10 @@ export class BackendService {
   public allThreads: any;
   public assignedChannel: any = [];
   channelID: string;
+  fileName = '';
+  
 
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  constructor(private firestore: AngularFirestore, private router: Router, private http: HttpClient) {}
 
   async setAllChannels(actualUser) {
     this.firestore
@@ -146,5 +149,26 @@ export class BackendService {
     mins = String(inputTime.getMinutes()).padStart(2, '0');
     mins = mins <= 9 ? '0' + mins : mins;
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
+  }
+
+  onFileSelected(event) {
+
+    const file: File = event.target.files[0];
+
+   /* if (file) {
+      this.fileName = file.name;
+      const formData = new FormData();
+      formData.append("thumbnail", file);
+      const upload$ = this.http.post("/api/thumbnail-upload", formData);
+      upload$.subscribe();
+    }
+    */
+    
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    
+    reader.onload = (_event) => {
+			this.thread.imgUrl = reader.result; 
+		}
   }
 }

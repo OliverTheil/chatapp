@@ -14,7 +14,7 @@ export class InputfieldComponent implements OnInit {
   clear: '';
 
   constructor(
-    private backend: BackendService,
+    public backend: BackendService,
     private authService: AuthService
   ) {}
 

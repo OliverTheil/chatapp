@@ -1,6 +1,6 @@
 
 export class Thread {
-    imgUrl!: string;
+    imgUrl!: any;
     text!: string;
     creator!: string;
     date!: string;
