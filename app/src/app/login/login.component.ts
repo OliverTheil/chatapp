@@ -24,6 +24,14 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {}
 
+  signIn() {
+    if (this.email.length != 0 && this.password.length != 0) {
+      this.authService.SignIn(this.email, this.password);
+    } else {
+      alert('Please enter all your data!');
+    }
+  }
+
   loginGuest() {
     // this.auth.signInAnonymously();
     this.authService.SignUpAsGuest(

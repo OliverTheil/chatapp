@@ -39,13 +39,15 @@ export class ThreadComponent implements OnInit {
   }
 
   saveMessage() {
-    this.thread.creator =
-      this.authService.userName.firstName +
-      ' ' +
-      this.authService.userName.lastName;
+    if (this.thread.text != '') {
+      this.thread.creator =
+        this.authService.userName.firstName +
+        ' ' +
+        this.authService.userName.lastName;
       this.thread.dateInMs = Date.now();
-    this.thread.date = this.backend.getActualDateFormat(Date.now());
-    this.backend.saveMessage(this.thread);
-    this.clear = '';
+      this.thread.date = this.backend.getActualDateFormat(Date.now());
+      this.backend.saveMessage(this.thread);
+      this.clear = '';
+    }
   }
 }

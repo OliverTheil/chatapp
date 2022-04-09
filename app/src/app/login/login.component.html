@@ -24,9 +24,7 @@
         #userPassword
         required
       />
-      <button (click)="authService.SignIn(userName.value, userPassword.value)">
-        Login with email
-      </button>
+      <button (click)="signIn()">Login with email</button>
       <button (click)="reset = true">Reset your password</button>
 
       <button routerLink="/signup">Create a new account</button>

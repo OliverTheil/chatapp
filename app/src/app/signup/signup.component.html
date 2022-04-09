@@ -2,21 +2,26 @@
   <div class="login__window">
     <p>Create a new user.</p>
     <input
-      [(ngModel)]="authService.userName.firstName"
+      [(ngModel)]="firstname"
       placeholder="firstname"
       type="text"
       required
     />
+    <input [(ngModel)]="lastname" placeholder="lastname" type="text" required />
     <input
-      [(ngModel)]="authService.userName.lastName"
-      placeholder="lastname"
+      [(ngModel)]="email"
+      placeholder="email"
       type="text"
+      #userMail
       required
     />
-    <input placeholder="email" type="text" #userMail required />
-    <input placeholder="password" type="password" #userPassword required />
-    <button (click)="authService.SignUp(userMail.value, userPassword.value)">
-      Sign Up
-    </button>
+    <input
+      [(ngModel)]="password"
+      placeholder="password"
+      type="password"
+      #userPassword
+      required
+    />
+    <button (click)="signUp()">Sign Up</button>
   </div>
 </div>

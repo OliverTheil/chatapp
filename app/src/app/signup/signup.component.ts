@@ -14,6 +14,10 @@ import { user } from '@angular/fire/auth';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  email = '';
+  password = '';
+  firstname = '';
+  lastname = '';
   userName: UserName = new UserName();
   constructor(
     public authService: AuthService,
@@ -22,4 +26,19 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  signUp() {
+    this.authService.userName.firstName = this.firstname;
+    this.authService.userName.lastName = this.lastname;
+    if (
+      this.email.length != 0 &&
+      this.password.length != 0 &&
+      this.firstname.length != 0 &&
+      this.lastname.length != 0
+    ) {
+      this.authService.SignUp(this.email, this.password);
+    } else {
+      alert('Please enter all your data!');
+    }
+  }
 }

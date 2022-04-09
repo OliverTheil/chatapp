@@ -47,6 +47,7 @@ export class AuthService {
         this.ngZone.run(() => {});
         this.SetUserData(result.user);
       })
+
       .catch((error) => {
         window.alert(error.message);
       });
