@@ -113,22 +113,27 @@ export class BackendService {
   }
 
   saveThread(thread) {
+    
+    console.log(thread.dateInMs);
     this.firestore
       .collection('channels')
       .doc(this.channelID)
       .collection('Threads')
-      .add(thread.toJson())
+      .doc(thread.dateInMs.toString())
+      .set(thread.toJson())
       .then((result: any) => {});
   }
 
   saveMessage(message) {
+    console.log('actualThread:',this.actualThread);
     this.firestore
       .collection('channels')
       .doc(this.channelID)
       .collection('Threads')
       .doc(this.actualThread)
       .collection('messages')
-      .add(message.toJson())
+      .doc(message.dateInMs.toString())
+      .set(message.toJson())
       .then((result: any) => {
         console.log('message saved:', result);
       });
