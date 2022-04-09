@@ -44,9 +44,7 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/chat/' + result.user.uid]);
-        });
+        this.ngZone.run(() => {});
         this.SetUserData(result.user);
       })
       .catch((error) => {
@@ -59,7 +57,6 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
-        this.router.navigate(['/chat/' + result.user.uid]);
       });
   }
 
@@ -68,7 +65,6 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetGuestData(result.user);
-        this.router.navigate(['/chat/' + result.user.uid]);
       });
   }
 
