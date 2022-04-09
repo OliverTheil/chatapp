@@ -30,9 +30,12 @@ export class BackendService {
   isAlreadyPushed = false;
   channelID: string;
   fileName = '';
-  
 
-  constructor(private firestore: AngularFirestore, private router: Router, private http: HttpClient) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   async setAllChannels(actualUser) {
     console.log('setAllchannels');
@@ -40,34 +43,31 @@ export class BackendService {
       .collection('channels')
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
-        //this.allExistsChannels = changes;
         this.allChannels = [];
         this.assignedChannel = [];
         this.allExistsChannels = [];
         changes.forEach((element) => {
-          for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
-            
-            if (actualUser['assignedChannel'][i] == element['channelID']) {
-              this.allChannels.push(element);
-              this.isAlreadyPushed = true;
-              this.assignedChannel.push(element['channelID']);
-
-            } 
-
-
-
-          } 
-
-          if(!this.isAlreadyPushed){
-            this.allExistsChannels.push(element);
-          }
-          this.isAlreadyPushed=false;
-          console.log('test2', this.allExistsChannels);
-          
-          
-          
+          this.checkIfAlreadySubscribed(actualUser, element);
+          this.addToExistsChannelIfnotAlreadyAdded(element);
         });
       });
+  }
+
+  checkIfAlreadySubscribed(actualUser, element) {
+    for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
+      if (actualUser['assignedChannel'][i] == element['channelID']) {
+        this.allChannels.push(element);
+        this.isAlreadyPushed = true;
+        this.assignedChannel.push(element['channelID']);
+      }
+    }
+  }
+
+  addToExistsChannelIfnotAlreadyAdded(element) {
+    if (!this.isAlreadyPushed) {
+      this.allExistsChannels.push(element);
+    }
+    this.isAlreadyPushed = false;
   }
 
   subscribeChannel(userID, channelID) {
@@ -130,7 +130,6 @@ export class BackendService {
   }
 
   saveThread(thread) {
-    
     console.log(thread.dateInMs);
     this.firestore
       .collection('channels')
@@ -142,7 +141,7 @@ export class BackendService {
   }
 
   saveMessage(message) {
-    console.log('actualThread:',this.actualThread);
+    console.log('actualThread:', this.actualThread);
     this.firestore
       .collection('channels')
       .doc(this.channelID)
@@ -152,7 +151,6 @@ export class BackendService {
       .doc(message.dateInMs.toString())
       .set(message.toJson())
       .then((result: any) => {
-        console.log('message saved:', result);
       });
   }
 
@@ -174,10 +172,9 @@ export class BackendService {
   }
 
   onFileSelected(event) {
-
     const file: File = event.target.files[0];
 
-   /* if (file) {
+    /* if (file) {
       this.fileName = file.name;
       const formData = new FormData();
       formData.append("thumbnail", file);
@@ -185,12 +182,12 @@ export class BackendService {
       upload$.subscribe();
     }
     */
-    
+
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    
+
     reader.onload = (_event) => {
-			this.thread.imgUrl = reader.result; 
-		}
+      this.thread.imgUrl = reader.result;
+    };
   }
 }
