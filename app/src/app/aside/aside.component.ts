@@ -25,7 +25,7 @@ export class AsideComponent implements OnInit {
   mobileAsideActive = false;
   openMobileState = false;
   subscription: Subscription;
-  allChannels = [];
+
   username: UserName;
   userId = '';
 

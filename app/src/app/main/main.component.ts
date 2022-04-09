@@ -33,7 +33,6 @@ export class MainComponent implements OnInit {
       (openMobileState) => (this.openMobileState = openMobileState)
     );
 
-    // this.backend.setAllChannels();
 
   }
 

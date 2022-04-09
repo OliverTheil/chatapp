@@ -27,6 +27,7 @@ export class BackendService {
   public allMessages: any;
   public allThreads: any;
   public assignedChannel: any = [];
+  isAlreadyPushed = false;
   channelID: string;
   fileName = '';
   
@@ -34,20 +35,37 @@ export class BackendService {
   constructor(private firestore: AngularFirestore, private router: Router, private http: HttpClient) {}
 
   async setAllChannels(actualUser) {
+    console.log('setAllchannels');
     this.firestore
       .collection('channels')
       .valueChanges({ idField: 'channelID' })
       .subscribe((changes: any) => {
-        this.allExistsChannels = changes;
+        //this.allExistsChannels = changes;
         this.allChannels = [];
         this.assignedChannel = [];
+        this.allExistsChannels = [];
         changes.forEach((element) => {
           for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
+            
             if (actualUser['assignedChannel'][i] == element['channelID']) {
               this.allChannels.push(element);
+              this.isAlreadyPushed = true;
               this.assignedChannel.push(element['channelID']);
-            }
+
+            } 
+
+
+
+          } 
+
+          if(!this.isAlreadyPushed){
+            this.allExistsChannels.push(element);
           }
+          this.isAlreadyPushed=false;
+          console.log('test2', this.allExistsChannels);
+          
+          
+          
         });
       });
   }
@@ -71,7 +89,6 @@ export class BackendService {
       .valueChanges({ idField: 'threatID' })
       .subscribe((changes: any) => {
         this.allThreads = changes;
-        console.log('setAllThreads', changes, typeof changes);
       });
   }
 
