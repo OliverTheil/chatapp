@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   title = 'slacktest';
-
+  reset = false;
   email: string = '';
   password: string = '';
   userName = new UserName();
@@ -24,6 +24,14 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {}
 
+  signIn() {
+    if (this.email.length != 0 && this.password.length != 0) {
+      this.authService.SignIn(this.email, this.password);
+    } else {
+      alert('Please enter all your data!');
+    }
+  }
+
   loginGuest() {
     // this.auth.signInAnonymously();
     this.authService.SignUpAsGuest(
@@ -32,8 +40,13 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  resetPassword() {
+    this.authService.ForgotPassword(this.email);
+    this.reset = false;
+  }
+
   routeToChats() {
-    this.router.navigate(['/main/' + this.authService.userData.uid]);
+    this.router.navigate(['/chat/' + this.authService.userData.uid]);
   }
 
   logout() {
