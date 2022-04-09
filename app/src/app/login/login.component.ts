@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   title = 'slacktest';
-
+  reset = false;
   email: string = '';
   password: string = '';
   userName = new UserName();
@@ -30,6 +30,11 @@ export class LoginComponent implements OnInit {
       'guest' + Math.random().toString().slice(2) + '@account.guest',
       Math.random().toString().slice(2)
     );
+  }
+
+  resetPassword() {
+    this.authService.ForgotPassword(this.email);
+    this.reset = false;
   }
 
   routeToChats() {

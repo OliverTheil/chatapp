@@ -1,5 +1,5 @@
 <div class="login">
-  <div class="login__window">
+  <div *ngIf="!reset" class="login__window">
     <div
       class="login__window__auth"
       *ngIf="auth.user | async as user; else showLogin"
@@ -27,9 +27,22 @@
       <button (click)="authService.SignIn(userName.value, userPassword.value)">
         Login with email
       </button>
-      <!-- <button (click)="authService.GoogleAuth()">Login with Google</button> -->
+      <button (click)="reset = true">Reset your password</button>
+
       <button routerLink="/signup">Create a new account</button>
       <button (click)="loginGuest()">Or login as guest</button>
     </ng-template>
+  </div>
+  <div class="login__window" *ngIf="reset">
+    <h1>Enter your email:</h1>
+    <input
+      [(ngModel)]="email"
+      placeholder="email"
+      type="text"
+      #passwordResetEmail
+      required
+    />
+    <button (click)="resetPassword()">Reset</button>
+    <button (click)="reset = false">Back</button>
   </div>
 </div>
