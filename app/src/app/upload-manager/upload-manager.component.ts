@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-/*import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';*/
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 
 
@@ -10,14 +10,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./upload-manager.component.scss']
 })
 export class UploadManagerComponent implements OnInit {
- /* task: AngularFireUploadTask;*/
+  task: AngularFireUploadTask;
 
   percentage: Observable<number>;
 
   snapshot: Observable<any>;
   downloadURL: Observable<string>
 
-  /*constructor(private storage: AngularFireStorage) { }*/
+  constructor(private storage: AngularFireStorage) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +31,7 @@ export class UploadManagerComponent implements OnInit {
 
  
 
-  startUpload(event: FileList) {
+  startUpload(event: any) {
 
     const file = event.item(0);
 
@@ -41,10 +41,10 @@ export class UploadManagerComponent implements OnInit {
 
     
 
-    //this.task = this.storage.upload(path, file)
+   this.task = this.storage.upload(path, file)
 
-   // this.percentage = this.task.percentageChanges();
-    //this.snapshot = this.task.snapshotChanges();
+   this.percentage = this.task.percentageChanges();
+   this.snapshot = this.task.snapshotChanges();
     
     
   }
