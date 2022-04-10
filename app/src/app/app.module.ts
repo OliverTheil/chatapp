@@ -31,7 +31,7 @@ import { MessageComponent } from './message/message.component';
 import { InputfieldComponent } from './inputfield/inputfield.component';
 import { ThreadComponent } from './thread/thread.component';
 import { MainComponent } from './main/main.component';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireStorageModule, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -40,6 +40,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { DataService } from './data.service';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UploadManagerComponent } from './upload-manager/upload-manager.component';
+import { DropzoneDirective } from './directives/dropzone.directive';
+
 
 @NgModule({
   declarations: [
@@ -56,11 +59,14 @@ import { HttpClientModule } from '@angular/common/http';
     SignupComponent,
     VerifyEmailComponent,
     DialogAddChannelComponent,
+    UploadManagerComponent,
+    DropzoneDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    
 
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -77,6 +83,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    
+    
   ],
   providers: [ScreenTrackingService, UserTrackingService, DataService],
   bootstrap: [AppComponent],

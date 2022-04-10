@@ -30,6 +30,7 @@ export class BackendService {
   isAlreadyPushed = false;
   channelID: string;
   fileName = '';
+  Url: any;
   
   constructor(
     private firestore: AngularFirestore,
@@ -177,8 +178,8 @@ export class BackendService {
     reader.readAsDataURL(file);
 
     reader.onload = (_event) => {
-      this.thread.imgUrl = reader.result;
+      this.Url = reader.result;
     };
-    
+
   }
 }
