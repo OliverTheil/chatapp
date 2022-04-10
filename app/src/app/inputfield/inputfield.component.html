@@ -2,21 +2,39 @@
   <textarea
     [(ngModel)]="thread.text"
     class="inputfield__textarea"
+    [class.bold]="bold"
+    [class.italic]="italic"
+    [class.code]="code"
     id="chat__inputfield"
     cols="100"
     rows="6"
     [(ngModel)]="clear"
-    
   ></textarea>
   <div class="inputfield__buttons">
     <div>
-      <input type="file" class="file-input"
-       (change)="backend.onFileSelected($event)" #fileUpload>
-      <i (click)="fileUpload.click()"class="fa-solid fa-plus"></i>
+      <input
+        type="file"
+        class="file-input"
+        (change)="backend.onFileSelected($event)"
+        #fileUpload
+      />
+      <i (click)="fileUpload.click()" class="fa-solid fa-plus"></i>
       <i class="fa-solid fa-at"></i>
-      <i class="fa-solid fa-bold"></i>
-      <i class="fa-solid fa-italic"></i>
-      <i class="fa-solid fa-code"></i>
+      <i
+        [class.fontActive]="bold"
+        (click)="boldFont()"
+        class="fa-solid fa-bold"
+      ></i>
+      <i
+        [class.fontActive]="italic"
+        (click)="italicFont()"
+        class="fa-solid fa-italic"
+      ></i>
+      <i
+        [class.fontActive]="code"
+        (click)="codeFont()"
+        class="fa-solid fa-code"
+      ></i>
     </div>
     <div>
       <i class="fa-solid fa-paper-plane" (click)="saveThread()"></i>

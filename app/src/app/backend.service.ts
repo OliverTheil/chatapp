@@ -150,8 +150,7 @@ export class BackendService {
       .collection('messages')
       .doc(message.dateInMs.toString())
       .set(message.toJson())
-      .then((result: any) => {
-      });
+      .then((result: any) => {});
   }
 
   getUserIdFromLocalStorage() {
@@ -166,7 +165,7 @@ export class BackendService {
     let day = inputTime.getDate();
     let hrs = inputTime.getHours();
     let mins: any = inputTime.getMinutes();
-    mins = String(inputTime.getMinutes()).padStart(2, '0');
+    mins = String(inputTime.getMinutes()).padStart(1, '0');
     mins = mins <= 9 ? '0' + mins : mins;
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }

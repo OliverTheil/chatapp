@@ -18,7 +18,12 @@
             <p class="message__time">at: {{ message.date }}</p>
           </div>
         </div>
-        <div class="message__user__text">
+        <div
+          [class.bold]="this.message.bold == true"
+          [class.italic]="this.message.italic == true"
+          [class.code]="this.message.code == true"
+          class="message__user__text"
+        >
           {{ message.text }}
         </div>
       </div>
@@ -28,6 +33,9 @@
     <textarea
       [(ngModel)]="thread.text"
       class="inputfield__textarea"
+      [class.bold]="bold"
+      [class.italic]="italic"
+      [class.code]="code"
       name=""
       id=""
       cols="100"
@@ -37,9 +45,21 @@
     <div class="inputfield__buttons">
       <i class="fa-solid fa-plus"></i>
       <i class="fa-solid fa-at"></i>
-      <i class="fa-solid fa-bold"></i>
-      <i class="fa-solid fa-italic"></i>
-      <i class="fa-solid fa-code"></i>
+      <i
+        [class.fontActive]="bold"
+        (click)="boldFont()"
+        class="fa-solid fa-bold"
+      ></i>
+      <i
+        [class.fontActive]="italic"
+        (click)="italicFont()"
+        class="fa-solid fa-italic"
+      ></i>
+      <i
+        [class.fontActive]="code"
+        (click)="codeFont()"
+        class="fa-solid fa-code"
+      ></i>
       <i class="fa-solid fa-paper-plane" (click)="saveMessage()"></i>
     </div>
   </section>

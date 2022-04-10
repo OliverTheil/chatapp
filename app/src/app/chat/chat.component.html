@@ -10,14 +10,17 @@
         <p class="message__time">at: {{ thread.date }}</p>
       </div>
     </div>
-    <div class="message__user__text">
-      {{ thread.text }} 
-      <img [src]="thread.imgUrl" *ngIf="thread.imgUrl">
-     
+    <div
+      [class.bold]="this.thread.bold == true"
+      [class.italic]="this.thread.italic == true"
+      [class.code]="this.thread.code == true"
+      class="message__user__text"
+    >
+      {{ thread.text }}
+      <img [src]="thread.imgUrl" *ngIf="thread.imgUrl" />
     </div>
     <div class="message__react__div">
       <p (click)="changeState(thread.threatID)" class="highlighted">React</p>
-      
     </div>
   </div>
 </section>

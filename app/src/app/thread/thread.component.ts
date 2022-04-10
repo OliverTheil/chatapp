@@ -12,6 +12,9 @@ import { AuthService } from '../auth.service';
 export class ThreadComponent implements OnInit {
   openState: boolean = true;
   subscription: Subscription;
+  bold = false;
+  italic = false;
+  code = false;
   thread = new Thread();
   clear: '';
   constructor(
@@ -24,6 +27,36 @@ export class ThreadComponent implements OnInit {
     this.subscription = this.data.currentState.subscribe(
       (openState) => (this.openState = openState)
     );
+  }
+
+  boldFont() {
+    if (!this.bold) {
+      this.bold = true;
+      this.thread.bold = true;
+    } else if (this.bold) {
+      this.bold = false;
+      this.thread.bold = false;
+    }
+  }
+
+  italicFont() {
+    if (!this.italic) {
+      this.italic = true;
+      this.thread.italic = true;
+    } else if (this.italic) {
+      this.italic = false;
+      this.thread.italic = false;
+    }
+  }
+
+  codeFont() {
+    if (!this.code) {
+      this.code = true;
+      this.thread.code = true;
+    } else if (this.code) {
+      this.code = false;
+      this.thread.code = false;
+    }
   }
 
   changeState() {
@@ -47,6 +80,7 @@ export class ThreadComponent implements OnInit {
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
       this.backend.saveMessage(this.thread);
+      this.thread.text = '';
       this.clear = '';
     }
   }
