@@ -30,7 +30,7 @@ export class BackendService {
   isAlreadyPushed = false;
   channelID: string;
   fileName = '';
-
+  
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
@@ -173,20 +173,12 @@ export class BackendService {
   onFileSelected(event) {
     const file: File = event.target.files[0];
 
-    /* if (file) {
-      this.fileName = file.name;
-      const formData = new FormData();
-      formData.append("thumbnail", file);
-      const upload$ = this.http.post("/api/thumbnail-upload", formData);
-      upload$.subscribe();
-    }
-    */
-
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
     reader.onload = (_event) => {
       this.thread.imgUrl = reader.result;
     };
+    
   }
 }
