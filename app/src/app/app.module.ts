@@ -39,7 +39,7 @@ import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { DataService } from './data.service';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,6 @@ import { HttpClientModule } from '@angular/common/http'
     SignupComponent,
     VerifyEmailComponent,
     DialogAddChannelComponent,
-    
   ],
   imports: [
     BrowserModule,

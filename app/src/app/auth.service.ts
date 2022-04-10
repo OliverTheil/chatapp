@@ -11,6 +11,7 @@ import { UserName } from 'src/models/username.class';
 import * as firebase from 'firebase/compat';
 import { resourceLimits } from 'worker_threads';
 import { BackendService } from './backend.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -47,9 +48,40 @@ export class AuthService {
         this.ngZone.run(() => {});
         this.SetUserData(result.user);
       })
-
       .catch((error) => {
-        window.alert(error.message);
+        if (error.message.includes('wrong')) {
+          Swal.fire({
+            title: 'Wrong Email or Password!',
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        if (error.message.includes('user')) {
+          Swal.fire({
+            title: 'Wrong Email or Password!',
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        if (error.message.includes('invalid')) {
+          Swal.fire({
+            title: 'Invalid Email!',
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
   }
   // Sign up with email/password
@@ -58,6 +90,30 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
+      })
+      .catch((error) => {
+        if (error.message.includes('already')) {
+          Swal.fire({
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+            title: 'Your email already exists!',
+          });
+        }
+        if (error.message.includes('invalid')) {
+          Swal.fire({
+            title: 'Invalid Email!',
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
   }
 
@@ -66,6 +122,9 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetGuestData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
       });
   }
 
@@ -77,7 +136,27 @@ export class AuthService {
         window.alert('Password reset email sent, check your inbox.');
       })
       .catch((error) => {
-        window.alert(error);
+        if (error.message.includes('invalid')) {
+          Swal.fire({
+            title: 'Invalid Email!',
+            position: 'center',
+            heightAuto: false,
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        if (error.message.includes('wrong')) {
+          Swal.fire({
+            position: 'center',
+            background: 'rgb(39, 39, 39)',
+            icon: 'error',
+            title: 'Your entered email does not exist!',
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
       });
   }
   // Returns true when user is looged in and email is verified

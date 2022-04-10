@@ -7,6 +7,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { user } from '@angular/fire/auth';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -38,7 +39,15 @@ export class SignupComponent implements OnInit {
     ) {
       this.authService.SignUp(this.email, this.password);
     } else {
-      alert('Please enter all your data!');
+      Swal.fire({
+        title: 'Please enter all your data!',
+        position: 'center',
+        heightAuto: false,
+        background: 'rgb(39, 39, 39)',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   }
 }
