@@ -27,7 +27,9 @@ export class UploadServiceService {
   constructor(private storage: AngularFireStorage, public firestore: AngularFirestore) { }
 
   async startUpload(event) {
-
+    ;
+    const file_ID = timestamp + '_' + Math.random() + 100 * 10;
+  ;
     
 
     const file: File = event.target.files[0];
@@ -36,27 +38,28 @@ export class UploadServiceService {
 
     const path = `files/${new Date().getTime()}_${file.name}`;
 
-    
-
     this.task = this.storage.upload(path, file);
     const ref = this.storage.ref(path);
     this.percentage = this.task.percentageChanges();
-      
-    this.snapshot = this.task.snapshotChanges().pipe(               // emits a snapshot of the transfer progress every few hundred milliseconds
-    tap(console.log),
+    this.snapshot = this.task.snapshotChanges().pipe(tap(console.log),
     finalize(async () => {                                      // after the observable completes, get the file's download URL
-        this.downloadURL = await ref.getDownloadURL().toPromise()
+        this.downloadURL = await ref.getDownloadURL();
 
-        this.firestore.collection('files').add({
-          path: path
+        this.firestore.collection('files').doc(file_ID).set({
+            storagePath: path,
+            downloadURL: this.downloadURL,
+            originalName: file,
+          
         })
             .then(function () {
                 console.log('document written!');
             })
-            
+            .catch(function (error) {
+                console.error('Error writing document:', error);
+            });
     }),
 );
-
+  
      
     
   }
