@@ -10,13 +10,15 @@
     rows="6"
     [(ngModel)]="clear"
   ></textarea>
-  <app-upload-manager></app-upload-manager>
+  <div *ngIf="upload.percentage |async as pct">
+    <progress [value] = "pct"></progress>
+  </div>
   <div class="inputfield__buttons">
     <div>
       <input
         type="file"
         class="file-input"
-        (change)="backend.onFileSelected($event)"
+        (change)="upload.startUpload($event)"
         #fileUpload
       />
       <i (click)="fileUpload.click()" class="fa-solid fa-plus"></i>

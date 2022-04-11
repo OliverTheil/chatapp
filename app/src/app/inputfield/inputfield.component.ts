@@ -3,6 +3,7 @@ import { Thread } from 'src/models/thread.class';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
 import { BackendService } from '../backend.service';
+import { UploadServiceService } from '../upload-service.service';
 
 @Component({
   selector: 'app-inputfield',
@@ -18,7 +19,8 @@ export class InputfieldComponent implements OnInit {
 
   constructor(
     public backend: BackendService,
-    private authService: AuthService
+    private authService: AuthService,
+    public upload: UploadServiceService,
   ) {}
 
   ngOnInit(): void {}

@@ -1,16 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ref } from '@angular/fire/database';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { finalize, Observable, tap, timestamp } from 'rxjs';
 
 
-@Component({
-  selector: 'app-upload-manager',
-  templateUrl: './upload-manager.component.html',
-  styleUrls: ['./upload-manager.component.scss']
+
+@Injectable({
+  providedIn: 'root'
 })
-export class UploadManagerComponent implements OnInit {
+export class UploadServiceService {
+
   @Input() file: File;
   
   task: AngularFireUploadTask;
@@ -24,20 +24,7 @@ export class UploadManagerComponent implements OnInit {
  
 
 
-
-  constructor(private storage: AngularFireStorage, private firestore: AngularFirestore) { }
-
-  ngOnInit(): void {
-  }
- 
- 
-
-
-  toggleHover(event: any) {
-      this.isHovering = event;
-  }
-
- 
+  constructor(private storage: AngularFireStorage, public firestore: AngularFirestore) { }
 
   async startUpload(event) {
 
@@ -54,15 +41,26 @@ export class UploadManagerComponent implements OnInit {
     this.task = this.storage.upload(path, file);
     const ref = this.storage.ref(path);
     this.percentage = this.task.percentageChanges();
-    this.task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = ref.getDownloadURL()
-        this.downloadURL.subscribe(url => (this.currentFile = url));
-      })
-      )
-      .subscribe();
+      
+    this.snapshot = this.task.snapshotChanges().pipe(               // emits a snapshot of the transfer progress every few hundred milliseconds
+    tap(console.log),
+    finalize(async () => {                                      // after the observable completes, get the file's download URL
+        this.downloadURL = await ref.getDownloadURL().toPromise()
+
+        this.firestore.collection('files').add({
+          path: path
+        })
+            .then(function () {
+                console.log('document written!');
+            })
+            
+    }),
+);
+
+     
     
   }
+
 
   isActive(snapshot) {
   return snapshot.state === 'running' && snapshot.bytesTransferred<snapshot.totalBytes

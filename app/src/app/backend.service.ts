@@ -175,16 +175,6 @@ export class BackendService {
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }
 
-  onFileSelected(event) {
-    const file: File = event.target.files[0];
-
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = (_event) => {
-      this.Url = reader.result;
-    };
-  }
 
   errorMessage(error) {
     return Swal.fire({

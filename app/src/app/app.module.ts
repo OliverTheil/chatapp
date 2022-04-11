@@ -40,7 +40,6 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { DataService } from './data.service';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UploadManagerComponent } from './upload-manager/upload-manager.component';
 import { DropzoneDirective } from './directives/dropzone.directive';
 
 
@@ -59,7 +58,6 @@ import { DropzoneDirective } from './directives/dropzone.directive';
     SignupComponent,
     VerifyEmailComponent,
     DialogAddChannelComponent,
-    UploadManagerComponent,
     DropzoneDirective,
   ],
   imports: [

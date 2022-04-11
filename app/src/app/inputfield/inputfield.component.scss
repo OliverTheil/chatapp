@@ -58,3 +58,7 @@
 .file-input {
   display: none;
 }
+
+progress::-webkit-progress-value{
+  transition: width 0.1 ease;
+}
