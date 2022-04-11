@@ -8,6 +8,7 @@ import { UserName } from 'src/models/username.class';
 import { AuthService } from './auth.service';
 import { user } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,7 @@ export class BackendService {
   public allMessages: any;
   public allThreads: any;
   public assignedChannel: any = [];
+  public allUser: any;
   isAlreadyPushed = false;
   searchInput = '';
   search = false;
@@ -182,5 +184,17 @@ export class BackendService {
     reader.onload = (_event) => {
       this.Url = reader.result;
     };
+  }
+
+  errorMessage(error) {
+    return Swal.fire({
+      position: 'center',
+      background: 'rgb(39, 39, 39)',
+      icon: 'error',
+      title: error,
+      heightAuto: false,
+      showConfirmButton: false,
+      timer: 3000,
+    });
   }
 }

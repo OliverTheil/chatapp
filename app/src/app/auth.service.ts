@@ -50,37 +50,13 @@ export class AuthService {
       })
       .catch((error) => {
         if (error.message.includes('wrong')) {
-          Swal.fire({
-            title: 'Wrong Email or Password!',
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.backend.errorMessage('Wrong Email or Password!');
         }
         if (error.message.includes('user')) {
-          Swal.fire({
-            title: 'Wrong Email or Password!',
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.backend.errorMessage('Wrong Email or Password!');
         }
         if (error.message.includes('invalid')) {
-          Swal.fire({
-            title: 'Invalid Email!',
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.backend.errorMessage('Invalid Email!');
         }
       });
   }
@@ -93,26 +69,10 @@ export class AuthService {
       })
       .catch((error) => {
         if (error.message.includes('already')) {
-          Swal.fire({
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-            title: 'Your email already exists!',
-          });
+          this.backend.errorMessage('The email already exists!');
         }
         if (error.message.includes('invalid')) {
-          Swal.fire({
-            title: 'Invalid Email!',
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.backend.errorMessage('Invalid Email!');
         }
       });
   }
@@ -133,29 +93,22 @@ export class AuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        Swal.fire({
+          title: 'Check your emails!',
+          position: 'center',
+          heightAuto: false,
+          background: 'rgb(39, 39, 39)',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         if (error.message.includes('invalid')) {
-          Swal.fire({
-            title: 'Invalid Email!',
-            position: 'center',
-            heightAuto: false,
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.backend.errorMessage('Invalid Email!');
         }
         if (error.message.includes('wrong')) {
-          Swal.fire({
-            position: 'center',
-            background: 'rgb(39, 39, 39)',
-            icon: 'error',
-            title: 'Your entered email does not exist!',
-            showConfirmButton: false,
-            timer: 3000,
-          });
+          this.backend.errorMessage('The email does not exist!');
         }
       });
   }
@@ -165,28 +118,28 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
   // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        this.SetUserData(res.user);
-        this.router.navigate(['/chat/' + res.user.uid]);
-      }
-    });
-  }
+  // GoogleAuth() {
+  //   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+  //     if (res) {
+  //       this.SetUserData(res.user);
+  //       this.router.navigate(['/chat/' + res.user.uid]);
+  //     }
+  //   });
+  // }
   // Auth logic to run auth providers
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/chat/' + result.user.uid]);
-        });
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }
+  // AuthLogin(provider: any) {
+  //   return this.afAuth
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       this.ngZone.run(() => {
+  //         this.router.navigate(['/chat/' + result.user.uid]);
+  //       });
+  //       this.SetUserData(result.user);
+  //     })
+  //     .catch((error) => {
+  //       window.alert(error);
+  //     });
+  // }
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */

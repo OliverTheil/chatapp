@@ -62,70 +62,12 @@ export class AsideComponent implements OnInit {
       });
   }
 
-  openDialogAddChannel() {}
-
   changeMobileState() {
     if (!this.openMobileState) {
       this.data.toggleMobile(true);
     } else if (this.openMobileState) {
       this.data.toggleMobile(false);
     }
-  }
-
-  toggleFav() {
-    if (!this.hideFav) {
-      this.hideFav = true;
-    } else if (this.hideFav) {
-      this.hideFav = false;
-    }
-  }
-
-  toggleChannel() {
-    if (!this.hideChannel) {
-      this.hideChannel = true;
-    } else if (this.hideChannel) {
-      this.hideChannel = false;
-    }
-  }
-
-  toggleDirects() {
-    if (!this.hideDirects) {
-      this.hideDirects = true;
-    } else if (this.hideDirects) {
-      this.hideDirects = false;
-    }
-  }
-
-  openUserEdit() {
-    if (!this.userClicked) {
-      this.userClicked = true;
-    } else if (this.userClicked) {
-      this.userClicked = false;
-    }
-  }
-
-  showChangePicture() {
-    if (!this.changePic) {
-      this.changeName = false;
-      this.changePic = true;
-    } else if (this.changePic) {
-      this.changePic = false;
-    }
-  }
-
-  showChangeName() {
-    if (!this.changeName) {
-      this.changePic = false;
-      this.changeName = true;
-    } else if (this.changeName) {
-      this.changeName = false;
-    }
-  }
-
-  saveChanges() {
-    /**
-     * ! FIRESTORE
-     */
   }
 
   openChannel(id: string) {
@@ -136,16 +78,4 @@ export class AsideComponent implements OnInit {
     this.auth.signOut();
     this.router.navigate(['']);
   }
-  // getUserData() {
-
-  //   this.afs
-  //     .collection('users')
-  //     .doc(this.AuthService.userData.uid)
-  //     .valueChanges()
-  //     .subscribe(() => {
-  //       console.log(this.username.firstName)
-
-  //     })
-
-  // }
 }

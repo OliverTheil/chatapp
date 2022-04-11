@@ -14,7 +14,7 @@
   background: #2c2c2c;
   border-radius: 6px;
   @extend .boxShadow;
-  border: 1px solid rgb(39, 39, 39);
+  border-right: 1px solid rgb(39, 39, 39);
 }
 
 .message__username {
@@ -56,7 +56,7 @@
   padding: 8px;
   width: fit-content;
 
-  img{
+  img {
     width: 40px;
   }
 }

@@ -10,6 +10,7 @@
     padding: 6px;
     max-width: 180px;
     overflow: hidden;
+    cursor: pointer;
   }
 }
 
@@ -50,7 +51,8 @@
   &:hover {
     cursor: pointer;
     transform: scale(1.05);
-    p {
+    p,
+    span {
       color: rgba(224, 106, 9, 0.767);
     }
   }
@@ -74,7 +76,7 @@
     font-weight: 400;
   }
   &:hover {
-    i {
+    * {
       cursor: pointer;
       color: rgba(224, 106, 9, 0.767);
     }

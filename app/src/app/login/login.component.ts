@@ -5,6 +5,7 @@ import firebase from 'firebase/compat/app';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public auth: AngularFireAuth,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    public backend: BackendService
   ) {}
   ngOnInit(): void {}
 
@@ -29,15 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.email.length != 0 && this.password.length != 0) {
       this.authService.SignIn(this.email, this.password);
     } else {
-      Swal.fire({
-        title: 'Please enter all your data!',
-        position: 'center',
-        heightAuto: false,
-        background: 'rgb(39, 39, 39)',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      this.backend.errorMessage('Please enter all your data!');
     }
   }
 
@@ -53,15 +47,7 @@ export class LoginComponent implements OnInit {
     if (this.email.length != 0) {
       this.authService.ForgotPassword(this.email);
     } else {
-      Swal.fire({
-        title: 'Please enter your email!',
-        position: 'center',
-        heightAuto: false,
-        background: 'rgb(39, 39, 39)',
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      this.backend.errorMessage('Please enter your email!');
     }
   }
 
