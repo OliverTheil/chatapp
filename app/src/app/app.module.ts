@@ -67,6 +67,7 @@ import { DropzoneDirective } from './directives/dropzone.directive';
     AppRoutingModule,
     HttpClientModule,
     
+    
 
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),

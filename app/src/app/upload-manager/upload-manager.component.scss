@@ -4,13 +4,12 @@
     justify-content: center;
     flex-direction: column;
     font-weight: 200;
-    height: 300px;
-    border: 10px solid #2465f1;
+    height: 70px;
+    border: 2px solid orange;
     border-radius: 5px;
-    background: rgb(255, 255, 255);
-    color: rgb(8, 73, 16);
+    background: rgba(53, 53, 53, 0.863);
 }
 
 .dropzone.hovering {
-    border: 10px dashed #2465f1;
+    border: 2px dashed orange;
 }
