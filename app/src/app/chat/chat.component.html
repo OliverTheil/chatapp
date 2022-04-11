@@ -1,6 +1,8 @@
 <section
   [class.hide]="
-    !thread.text.toLowerCase().includes(this.backend.searchInput.toLowerCase())
+    !(thread.text + thread.creator)
+      .toLowerCase()
+      .includes(this.backend.searchInput.toLowerCase())
   "
   class="message-box"
   *ngFor="let thread of backend.allThreads"

@@ -6,7 +6,7 @@
   <div class="thread__messages">
     <section
       [class.hide]="
-        !message.text
+        !(message.text + message.creator)
           .toLowerCase()
           .includes(this.backend.searchInput.toLowerCase())
       "
