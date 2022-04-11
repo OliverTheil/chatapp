@@ -16,6 +16,7 @@ export class ChatComponent implements OnInit {
   subscription: Subscription;
   channelID: string;
   allMessages: any;
+
   constructor(
     public backend: BackendService,
     private data: DataService,

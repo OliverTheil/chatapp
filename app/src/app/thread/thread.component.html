@@ -4,7 +4,15 @@
     <i (click)="changeState()" class="close fa-solid fa-xmark"></i>
   </div>
   <div class="thread__messages">
-    <section class="message-box" *ngFor="let message of backend.allMessages">
+    <section
+      [class.hide]="
+        !message.text
+          .toLowerCase()
+          .includes(this.backend.searchInput.toLowerCase())
+      "
+      class="message-box"
+      *ngFor="let message of backend.allMessages"
+    >
       <div class="message">
         <div class="message__user__div">
           <img

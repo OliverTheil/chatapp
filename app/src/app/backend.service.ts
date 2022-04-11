@@ -28,10 +28,12 @@ export class BackendService {
   public allThreads: any;
   public assignedChannel: any = [];
   isAlreadyPushed = false;
+  searchInput = '';
+  search = false;
   channelID: string;
   fileName = '';
   Url: any;
-  
+
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
@@ -180,6 +182,5 @@ export class BackendService {
     reader.onload = (_event) => {
       this.Url = reader.result;
     };
-
   }
 }

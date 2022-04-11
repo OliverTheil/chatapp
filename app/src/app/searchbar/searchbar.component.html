@@ -1,1 +1,7 @@
-<input class="searchbar__input" placeholder="search" type="text" />
+<input
+  (input)="search()"
+  [(ngModel)]="searchInput"
+  class="searchbar__input"
+  placeholder="search"
+  type="text"
+/>

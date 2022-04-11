@@ -1,4 +1,10 @@
-<section class="message-box" *ngFor="let thread of backend.allThreads">
+<section
+  [class.hide]="
+    !thread.text.toLowerCase().includes(this.backend.searchInput.toLowerCase())
+  "
+  class="message-box"
+  *ngFor="let thread of backend.allThreads"
+>
   <div class="message">
     <div class="message__user__div">
       <img
