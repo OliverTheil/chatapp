@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { UserName } from 'src/models/username.class';
 import { AuthService } from '../auth.service';
-import Swal from 'sweetalert2';
 import { BackendService } from '../backend.service';
 
 @Component({

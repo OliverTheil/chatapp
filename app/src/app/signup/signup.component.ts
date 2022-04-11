@@ -7,7 +7,6 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { user } from '@angular/fire/auth';
-import Swal from 'sweetalert2';
 import { BackendService } from '../backend.service';
 
 @Component({
