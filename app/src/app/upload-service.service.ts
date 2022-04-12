@@ -27,9 +27,9 @@ export class UploadServiceService {
   constructor(private storage: AngularFireStorage, public firestore: AngularFirestore) { }
 
   async startUpload(event) {
-    ;
+    
     const file_ID = timestamp + '_' + Math.random() + 100 * 10;
-  ;
+  
     
 
     const file: File = event.target.files[0];

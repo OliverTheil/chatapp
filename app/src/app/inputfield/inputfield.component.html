@@ -10,6 +10,7 @@
     rows="6"
     [(ngModel)]="clear"
   ></textarea>
+  <div><img [src]="upload.file" *ngIf="upload.file"></div>
   <div *ngIf="upload.percentage |async as pct">
     <progress [value] = "pct"></progress>
   </div>
