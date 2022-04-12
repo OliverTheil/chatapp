@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
 import { Thread } from 'src/models/thread.class';
 import { AuthService } from '../auth.service';
+import { UploadServiceService } from '../upload-service.service';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -20,8 +21,9 @@ export class ThreadComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private data: DataService,
-    public backend: BackendService
-  ) {}
+    public backend: BackendService,
+    public upload: UploadServiceService,
+  ) { }
 
   ngOnInit(): void {
     this.subscription = this.data.currentState.subscribe(
@@ -80,8 +82,10 @@ export class ThreadComponent implements OnInit {
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
       this.backend.saveMessage(this.thread);
+      this.thread.imgUrl = this.upload.downloadURL;
       this.thread.text = '';
       this.clear = '';
+
     }
   }
 }

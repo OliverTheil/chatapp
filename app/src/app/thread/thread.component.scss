@@ -8,6 +8,7 @@
   justify-content: flex-start;
   align-items: center;
   background: rgba(53, 53, 53, 0.863);
+
   @media (max-width: 900px) {
     background: rgb(53, 53, 53);
     width: 94%;
@@ -26,9 +27,11 @@
   border-radius: 6px;
   @extend .boxShadow;
   border-right: 1px solid rgba(0, 0, 0, 0.459);
+
   p {
     font-weight: 400;
   }
+
   @media (max-width: 500px) {
     width: 120px;
   }
@@ -54,6 +57,7 @@
   border: 1px solid rgba(255, 255, 255, 0.624);
   background-color: #2c2c2c;
   border-radius: 6px;
+
   @media (max-width: 900px) {
     width: 90%;
   }
@@ -81,8 +85,10 @@
   border-radius: 6px;
   @extend .boxShadow;
   border-right: 1px solid rgba(0, 0, 0, 0.459);
+
   i {
     padding: 4px 10px 4px 10px;
+
     &:hover {
       cursor: pointer;
       color: rgba(224, 106, 9, 0.767);
@@ -180,8 +186,30 @@ p {
   margin-bottom: 8px;
   border-radius: 6px;
   cursor: pointer;
+
   &:hover {
     filter: brightness(1.2);
     transform: scale(1.05);
   }
+}
+
+progress::-webkit-progress-value {
+  transition: width 0.1 ease;
+}
+
+progress {
+
+  width: 60px;
+}
+
+.preview-container {
+
+  img {
+    width: 60px;
+  }
+
+}
+
+input {
+  display: none;
 }

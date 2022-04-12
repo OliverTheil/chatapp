@@ -41,6 +41,7 @@
           class="message__user__text"
         >
           {{ message.text }}
+
         </div>
       </div>
     </section>
@@ -58,8 +59,19 @@
       rows="6"
       [(ngModel)]="clear"
     ></textarea>
+
+    <div contenteditable="true" class= "preview-container"><img [src]="upload.downloadURL" *ngIf="upload.downloadURL"></div>
+<div *ngIf="upload.percentage |async as pct">
+  <progress [value] = "pct"></progress>
+</div>
     <div class="inputfield__buttons">
-      <i class="fa-solid fa-plus"></i>
+      <input
+        type="file"
+        class="file-input"
+        (change)="upload.startUpload($event)"
+        #fileUpload
+      />
+      <i (click)="fileUpload.click()" class="fa-solid fa-plus"></i>
       <i class="fa-solid fa-at"></i>
       <i
         [class.fontActive]="bold"

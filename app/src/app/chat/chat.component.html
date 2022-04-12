@@ -9,11 +9,7 @@
 >
   <div class="message">
     <div class="message__file__container">
-      <img
-        class="message__file"
-        src="https://firebasestorage.googleapis.com/v0/b/chatapp-72bc7.appspot.com/o/files%2F1649700768414_bild8.jpg?alt=media&token=a9e95f48-7bf7-4137-a71f-be320a2dba40"
-        onclick="window.open('https://firebasestorage.googleapis.com/v0/b/chatapp-72bc7.appspot.com/o/files%2F1649700768414_bild8.jpg?alt=media&token=a9e95f48-7bf7-4137-a71f-be320a2dba40');"
-      />
+     
     </div>
     <div class="message__user__div">
       <img
@@ -32,6 +28,8 @@
       class="message__user__text"
     >
       {{ thread.text }}
+
+      <img [src]="thread.imgUrl" *ngIf="thread.imgUrl">
 
       <!-- <img [src]="backend.Url" *ngIf="backend.Url" /> -->
     </div>

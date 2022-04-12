@@ -21,9 +21,9 @@ export class InputfieldComponent implements OnInit {
     public backend: BackendService,
     private authService: AuthService,
     public upload: UploadServiceService,
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   boldFont() {
     if (!this.bold) {
@@ -64,9 +64,12 @@ export class InputfieldComponent implements OnInit {
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
       // this.thread.tag = 'bold';
+      this.thread.imgUrl = this.upload.downloadURL;
       this.backend.saveThread(this.thread);
+
       this.thread.text = '';
       this.clear = '';
+
     }
   }
 
