@@ -85,6 +85,7 @@ export class ThreadComponent implements OnInit {
       this.thread.imgUrl = this.upload.downloadURL;
       this.thread.text = '';
       this.clear = '';
+      this.thread.imgUrl = '';
 
     }
   }

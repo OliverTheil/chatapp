@@ -66,7 +66,7 @@ export class InputfieldComponent implements OnInit {
       // this.thread.tag = 'bold';
       this.thread.imgUrl = this.upload.downloadURL;
       this.backend.saveThread(this.thread);
-
+      this.thread.imgUrl = '';
       this.thread.text = '';
       this.clear = '';
 

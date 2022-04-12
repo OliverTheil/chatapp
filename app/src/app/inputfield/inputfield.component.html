@@ -12,7 +12,8 @@
     
   >
 </textarea>
-<div contenteditable="true" class= "preview-container"><img [src]="upload.downloadURL" *ngIf="upload.downloadURL"></div>
+<div contenteditable="true" class= "preview-container">
+  <img [src]="upload.downloadURL" *ngIf="upload.downloadURL"></div>
 <div *ngIf="upload.percentage |async as pct">
   <progress [value] = "pct"></progress>
 </div>
