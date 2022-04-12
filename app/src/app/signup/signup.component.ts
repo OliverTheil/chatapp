@@ -8,6 +8,8 @@ import {
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { user } from '@angular/fire/auth';
 import { BackendService } from '../backend.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +26,8 @@ export class SignupComponent implements OnInit {
     public authService: AuthService,
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
-    public backend: BackendService
+    public backend: BackendService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -39,6 +42,16 @@ export class SignupComponent implements OnInit {
       this.lastname.length != 0
     ) {
       this.authService.SignUp(this.email, this.password);
+      this.router.navigate(['']);
+      Swal.fire({
+        position: 'center',
+        background: 'rgb(39, 39, 39)',
+        icon: 'success',
+        title: 'Nice! You have been added!',
+        heightAuto: false,
+        showConfirmButton: false,
+        timer: 2000,
+      });
     } else {
       this.backend.errorMessage('Please enter all your data!');
     }

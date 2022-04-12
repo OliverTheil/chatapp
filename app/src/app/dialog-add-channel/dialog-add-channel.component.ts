@@ -30,7 +30,7 @@ export class DialogAddChannelComponent implements OnInit {
   addChannel(channelID) {
     console.log('adChannel channelID: ', channelID);
     this.backend.subscribeChannel(this.userID, channelID);
-    this.backToChat();
+    this.router.navigate(['/chat/' + channelID]);
   }
 
   backToChat() {
