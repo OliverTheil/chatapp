@@ -2,7 +2,7 @@ import { Injectable, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ref } from '@angular/fire/database';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { finalize, Observable, tap, timestamp } from 'rxjs';
+import { finalize, firstValueFrom, Observable, tap, timestamp } from 'rxjs';
 
 
 
@@ -28,39 +28,40 @@ export class UploadServiceService {
 
   async startUpload(event) {
     
-    const file_ID = timestamp + '_' + Math.random() + 100 * 10;
-  
     
-
     const file: File = event.target.files[0];
 
     //the storage path
-
     const path = `files/${new Date().getTime()}_${file.name}`;
-
-    this.task = this.storage.upload(path, file);
+    console.log(path);
     const ref = this.storage.ref(path);
-    this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges().pipe(tap(console.log),
-    finalize(async () => {                                      // after the observable completes, get the file's download URL
-        this.downloadURL = await ref.getDownloadURL();
+    console.log(ref);
+    this.task = this.storage.upload(path, file);
 
-        this.firestore.collection('files').doc(file_ID).set({
-            storagePath: path,
-            downloadURL: this.downloadURL,
-            originalName: file,
-          
+    this.percentage = this.task.percentageChanges();
+
+    this.task.snapshotChanges().pipe(
+      finalize(async () => {
+        console.log("FINALIZE UPLOAD################################################################################");                                     // after the observable completes, get the file's download URL
+        this.downloadURL = await firstValueFrom(ref.getDownloadURL());
+        console.log(this.downloadURL);
+
+        this.firestore.collection('files').add({
+          storagePath: path,
+          downloadURL: this.downloadURL,
+          originalName: file.name,
+        }).then(function () {
+          console.log('document written!');
         })
-            .then(function () {
-                console.log('document written!');
-            })
-            .catch(function (error) {
-                console.error('Error writing document:', error);
-            });
-    }),
-);
+          .catch(function (error) {
+            console.error('Error writing document:', error);
+          });
+      })
+    ).subscribe()
+
+
   
-     
+console.log(this.downloadURL)   
     
   }
 

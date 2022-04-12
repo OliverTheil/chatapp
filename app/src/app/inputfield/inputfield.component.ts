@@ -69,4 +69,6 @@ export class InputfieldComponent implements OnInit {
       this.clear = '';
     }
   }
+
 }
+
