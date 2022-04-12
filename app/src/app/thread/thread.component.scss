@@ -100,6 +100,7 @@
 }
 
 .message {
+  position: relative;
   margin-top: 20px;
   max-width: 100%;
   max-height: 400px;
@@ -158,4 +159,29 @@ p {
   background-color: rgb(69, 69, 69);
   box-shadow: rgba(66, 66, 66, 0.637) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.message__file__container {
+  position: absolute;
+  top: 16px;
+  right: 8px;
+  width: 40px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.message__file {
+  height: 20px;
+  width: 20px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+  }
 }

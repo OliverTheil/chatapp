@@ -6,6 +6,7 @@
 }
 
 .message {
+  position: relative;
   width: 100%;
   margin-top: 20px;
   max-width: 100%;
@@ -55,10 +56,6 @@
   font-size: 1.8rem;
   padding: 8px;
   width: fit-content;
-
-  img {
-    width: 40px;
-  }
 }
 
 p {
@@ -70,6 +67,30 @@ p {
 
   img {
     width: 60px;
+  }
+}
+
+.message__file__container {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 120px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+}
+
+.message__file {
+  height: 30px;
+  width: 30px;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
   }
 }
 
