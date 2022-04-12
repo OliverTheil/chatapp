@@ -5,14 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // background-image: url("/app/assets/img/justchat.png");
-  // background-position: center;
-  // background-size: 110%;
-  // background-repeat: no-repeat;
+  background-image: url("/assets/img/justchatBig.png");
+  background-position: bottom;
+  background-size: 60%;
+  background-repeat: no-repeat;
 }
 
 .login__window {
-  background: rgb(53, 53, 53);
+  background: rgba(53, 53, 53, 0.814);
   max-height: 600px;
   max-width: 400px;
   border-radius: 8px;
