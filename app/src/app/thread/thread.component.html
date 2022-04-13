@@ -14,13 +14,12 @@
       *ngFor="let message of backend.allMessages"
     >
       <div class="message">
-        <div class="message__file__container">
-          <img
+        <a href="{{ message.imgUrl }}" target="_blank"
+          ><img
             class="message__file"
-            src="https://firebasestorage.googleapis.com/v0/b/chatapp-72bc7.appspot.com/o/files%2F1649700768414_bild8.jpg?alt=media&token=a9e95f48-7bf7-4137-a71f-be320a2dba40"
-            onclick="window.open('https://firebasestorage.googleapis.com/v0/b/chatapp-72bc7.appspot.com/o/files%2F1649700768414_bild8.jpg?alt=media&token=a9e95f48-7bf7-4137-a71f-be320a2dba40');"
-          />
-        </div>
+            [src]="message.imgUrl"
+            *ngIf="message.imgUrl"
+        /></a>
 
         <div class="message__user__div">
           <img
@@ -41,29 +40,37 @@
           class="message__user__text"
         >
           {{ message.text }}
-
         </div>
       </div>
     </section>
   </div>
   <section class="thread__inputfield fixed">
-    <textarea
-      [(ngModel)]="thread.text"
-      class="inputfield__textarea"
-      [class.bold]="bold"
-      [class.italic]="italic"
-      [class.code]="code"
-      name=""
-      id=""
-      cols="100"
-      rows="6"
-      [(ngModel)]="clear"
-    ></textarea>
-    <div contenteditable="true" class= "preview-container"><img [src]="upload.downloadURL" *ngIf="upload.downloadURL"></div>
-    <div *ngIf="upload.percentage |async as pct">
-      <progress [value] = "pct"></progress>
+    <div class="inputfield__container">
+      <textarea
+        [(ngModel)]="thread.text"
+        class="inputfield__textarea"
+        [class.bold]="bold"
+        [class.italic]="italic"
+        [class.code]="code"
+        name=""
+        id=""
+        cols="100"
+        rows="6"
+        [(ngModel)]="clear"
+      ></textarea>
+      <div
+        [class.hide]="upload.downloadURL == null"
+        class="inputfield__uploadArea"
+      >
+        <div contenteditable="true" class="preview-container">
+          <img [src]="upload.downloadURL" *ngIf="upload.downloadURL" />
+        </div>
+        <div *ngIf="upload.percentage | async as pct">
+          <progress [value]="pct"></progress>
+        </div>
+      </div>
     </div>
-    
+
     <div class="inputfield__buttons">
       <input
         type="file"
@@ -72,7 +79,11 @@
         #Upload
       />
       <i (click)="Upload.click()" class="fa-solid fa-plus"></i>
-      <i class="fa-solid fa-at"></i>
+      <i
+        [class.hide]="upload.downloadURL == null"
+        (click)="upload.downloadURL = null"
+        class="fa-solid fa-minus"
+      ></i>
       <i
         [class.fontActive]="bold"
         (click)="boldFont()"

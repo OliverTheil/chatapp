@@ -10,6 +10,25 @@
   align-items: center;
 }
 
+.inputfield__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputfield__uploadArea {
+  height: 198px;
+  display: flex;
+  margin: 8px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: #2c2c2c;
+  border-radius: 6px;
+  @extend .boxShadow;
+}
+
 .inputfield__textarea {
   width: 96%;
   padding: 8px;
@@ -66,14 +85,12 @@ progress::-webkit-progress-value {
 }
 
 progress {
-
-  width: 60px;
+  height: 6px;
+  width: 80px;
 }
 
 .preview-container {
-
   img {
     width: 60px;
   }
-
 }

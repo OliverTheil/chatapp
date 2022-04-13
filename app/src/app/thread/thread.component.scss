@@ -167,22 +167,12 @@ p {
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
-.message__file__container {
+.message__file {
   position: absolute;
   top: 16px;
   right: 8px;
+  height: 40px;
   width: 40px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  overflow: hidden;
-}
-
-.message__file {
-  height: 20px;
-  width: 20px;
   margin-bottom: 8px;
   border-radius: 6px;
   cursor: pointer;
@@ -193,23 +183,37 @@ p {
   }
 }
 
+.inputfield__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputfield__uploadArea {
+  height: 118px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 6px;
+  @extend .boxShadow;
+}
+
 progress::-webkit-progress-value {
   transition: width 0.1 ease;
 }
 
-progress {
+input {
+  display: none;
+}
 
-  width: 60px;
+progress {
+  height: 6px;
+  width: 40px;
 }
 
 .preview-container {
-
   img {
-    width: 60px;
+    width: 40px;
   }
-
-}
-
-input {
-  display: none;
 }

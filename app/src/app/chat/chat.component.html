@@ -8,9 +8,6 @@
   *ngFor="let thread of backend.allThreads"
 >
   <div class="message">
-    <div class="message__file__container">
-     
-    </div>
     <div class="message__user__div">
       <img
         class="message__user__img"
@@ -29,9 +26,9 @@
     >
       {{ thread.text }}
 
-      <img [src]="thread.imgUrl" *ngIf="thread.imgUrl">
-
-      <!-- <img [src]="backend.Url" *ngIf="backend.Url" /> -->
+      <a href="{{ thread.imgUrl }}" target="_blank"
+        ><img class="message__file" [src]="thread.imgUrl" *ngIf="thread.imgUrl"
+      /></a>
     </div>
     <div class="message__react__div">
       <p (click)="changeState(thread.threatID)" class="highlighted">React</p>

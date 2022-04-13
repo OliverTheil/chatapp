@@ -22,8 +22,8 @@ export class ThreadComponent implements OnInit {
     private authService: AuthService,
     private data: DataService,
     public backend: BackendService,
-    public upload: UploadServiceService,
-  ) { }
+    public upload: UploadServiceService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.data.currentState.subscribe(
@@ -74,19 +74,19 @@ export class ThreadComponent implements OnInit {
   }
 
   saveMessage() {
-    if (this.thread.text != '') {
+    if (this.thread.text != '' || this.upload.downloadURL != null) {
       this.thread.creator =
         this.authService.userName.firstName +
         ' ' +
         this.authService.userName.lastName;
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
-      this.backend.saveMessage(this.thread);
       this.thread.imgUrl = this.upload.downloadURL;
+      this.backend.saveMessage(this.thread);
+      this.upload.downloadURL = null;
       this.thread.text = '';
       this.clear = '';
       this.thread.imgUrl = '';
-
     }
   }
 }

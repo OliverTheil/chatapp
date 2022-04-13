@@ -20,10 +20,10 @@ export class InputfieldComponent implements OnInit {
   constructor(
     public backend: BackendService,
     private authService: AuthService,
-    public upload: UploadServiceService,
-  ) { }
+    public upload: UploadServiceService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   boldFont() {
     if (!this.bold) {
@@ -56,22 +56,19 @@ export class InputfieldComponent implements OnInit {
   }
 
   saveThread() {
-    if (this.thread.text != '') {
+    if (this.thread.text != '' || this.upload.downloadURL != null) {
       this.thread.creator =
         this.authService.userName.firstName +
         ' ' +
         this.authService.userName.lastName;
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
-      // this.thread.tag = 'bold';
       this.thread.imgUrl = this.upload.downloadURL;
       this.backend.saveThread(this.thread);
+      this.upload.downloadURL = null;
       this.thread.imgUrl = '';
       this.thread.text = '';
       this.clear = '';
-
     }
   }
-
 }
-
