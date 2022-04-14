@@ -29,8 +29,10 @@ export class BackendService {
   public allThreads: any;
   public assignedChannel: any = [];
   public allUser: any;
+  public userSelected: any = [];
   isAlreadyPushed = false;
   searchInput = '';
+  searchUser = '';
   search = false;
   channelID: string;
   fileName = '';
@@ -57,6 +59,31 @@ export class BackendService {
         });
       });
   }
+
+  async setAllUser() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'userIDs' })
+      .subscribe((changes: any) => {
+        this.allUser = [];
+        changes.forEach((element, index) => {
+          this.allUser.push(element);
+        });
+      });
+  }
+
+  selectedUser(userIDs, user) {
+    if (!this.userSelected.includes(userIDs)) {
+      this.userSelected.push(userIDs);
+      this.firestore
+        .collection('users')
+        .doc(user)
+        .update({ userSelected: this.userSelected });
+      console.log(userIDs);
+    }
+  }
+
+  updateUserSelected() {}
 
   checkIfAlreadySubscribed(actualUser, element) {
     for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
@@ -174,7 +201,6 @@ export class BackendService {
     mins = mins <= 9 ? '0' + mins : mins;
     return hrs + ':' + mins + ', ' + day + '.' + month + '.' + year;
   }
-
 
   errorMessage(error) {
     return Swal.fire({

@@ -53,17 +53,24 @@
       <i [class.turn]="hideDirects" class="fa-solid fa-caret-down"></i>
     </div>
     <div [class.hide]="hideDirects" class="aside__section__group">
-      <div class="aside__section__channel__div">
-        <i class="fa-solid fa-user-large"></i>
-        <p>In</p>
+      <div
+        *ngFor="let user of backend.userSelected"
+        class="aside__section__channel__div spaceBetween"
+      >
+        <img
+          class="aside__section__user__img"
+          src="https://avatars.dicebear.com/api/bottts/:{{
+            user.Firstname + ' ' + user.Lastname
+          }}.svg"
+        />
+        <p>{{ user["Firstname"] }}</p>
       </div>
-      <div class="aside__section__channel__div">
-        <i class="fa-solid fa-user-large"></i>
-        <p>Progress</p>
-      </div>
-      <div class="aside__section__channel__div">
-        <i class="fa-solid fa-user-large"></i>
-        <p>...</p>
+      <div
+        (click)="!userSearch ? (userSearch = true) : (userSearch = false)"
+        class="aside__section__channel__div"
+      >
+        <i class="fa-solid fa-plus"></i>
+        <p class="font--16">chat</p>
       </div>
     </div>
   </section>
@@ -82,5 +89,46 @@
       (click)="!userClicked ? (userClicked = true) : (userClicked = false)"
       class="fa-solid fa-xmark close absolute"
     ></i>
+  </section>
+  <section
+    *ngIf="userSearch"
+    class="aside__searchUser__Container userEdit fixed z--1"
+  >
+    <div class="userEdit__head">
+      <input
+        (input)="search()"
+        [(ngModel)]="searchInput"
+        class="aside__searchUser__bar"
+        placeholder="search"
+        type="text"
+      />
+    </div>
+    <div class="aside__searchUser">
+      <div
+        *ngFor="let user of backend.allUser"
+        class="aside__section__channel__div spaceAround"
+        (click)="
+          backend.selectedUser(user.userIDs, AuthService.userData.uid);
+          userSearch = false
+        "
+        [class.hide]="
+          !(user.Firstname + user.Lastname)
+            .toLowerCase()
+            .includes(this.backend.searchUser.toLowerCase())
+        "
+      >
+        <img
+          class="aside__section__user__img"
+          src="https://avatars.dicebear.com/api/bottts/:{{
+            user.Firstname + ' ' + user.Lastname
+          }}.svg"
+        />
+        <p>{{ user["Firstname"] }} {{ user["Lastname"] }}</p>
+      </div>
+      <i
+        (click)="!userSearch ? (userSearch = true) : (userSearch = false)"
+        class="fa-solid fa-xmark close absolute"
+      ></i>
+    </div>
   </section>
 </section>

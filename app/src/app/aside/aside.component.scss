@@ -138,3 +138,33 @@
   top: 32px;
   right: 16px;
 }
+
+.aside__searchUser__Container {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 40px;
+
+  div {
+    padding: 6px;
+    width: 96%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+}
+
+.aside__searchUser {
+  height: 400px;
+  overflow-y: scroll !important;
+  width: 100%;
+}
+
+.aside__searchUser__bar {
+  margin-top: 60px !important;
+}
+
+.spaceBetween {
+  justify-content: space-between !important;
+}

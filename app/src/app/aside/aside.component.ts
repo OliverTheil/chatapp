@@ -22,9 +22,11 @@ export class AsideComponent implements OnInit {
   userClicked = false;
   changePic = false;
   changeName = false;
+  userSearch = false;
   mobileAsideActive = false;
   openMobileState = false;
   subscription: Subscription;
+  searchInput: string = '';
 
   username: UserName;
   userId = '';
@@ -77,5 +79,9 @@ export class AsideComponent implements OnInit {
   logout() {
     this.auth.signOut();
     this.router.navigate(['']);
+  }
+
+  search() {
+    this.backend.searchUser = this.searchInput;
   }
 }

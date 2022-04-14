@@ -171,6 +171,7 @@ export class AuthService {
       .set({
         userData,
         assignedChannel: [],
+        userSelected: [],
         Firstname: this.userName.firstName,
         Lastname: this.userName.lastName,
       })
@@ -192,6 +193,7 @@ export class AuthService {
     return this.afs.collection('users').doc(user.uid).set({
       userData,
       assignedChannel: [],
+      userSelected: [],
       Firstname: 'Guest',
       Lastname: 'Account',
     });
@@ -214,6 +216,8 @@ export class AuthService {
         this.userName.firstName = userChanges['Firstname'];
         this.userName.lastName = userChanges['Lastname'];
         this.backend.setAllChannels(userChanges);
+        this.backend.setAllUser();
+        this.backend.updateUserSelected();
       });
   }
 }
