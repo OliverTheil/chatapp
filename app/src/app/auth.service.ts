@@ -12,6 +12,7 @@ import * as firebase from 'firebase/compat';
 import { resourceLimits } from 'worker_threads';
 import { BackendService } from './backend.service';
 import Swal from 'sweetalert2';
+import { throws } from 'assert';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
+        
       })
       .catch((error) => {
         if (error.message.includes('already')) {
@@ -171,13 +173,11 @@ export class AuthService {
       .set({
         userData,
         assignedChannel: [],
-        userSelected: [],
+        userSelected: [user.uid],
         Firstname: this.userName.firstName,
         Lastname: this.userName.lastName,
       })
-      .then(() => {
-        console.log(this.userName.firstName);
-      });
+     
   }
 
   SetGuestData(user: any) {
@@ -197,6 +197,7 @@ export class AuthService {
       Firstname: 'Guest',
       Lastname: 'Account',
     });
+
   }
 
   // Sign out

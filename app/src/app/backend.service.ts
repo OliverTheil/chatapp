@@ -92,6 +92,8 @@ export class BackendService {
     }
   }
 
+
+
   checkIfAlreadySubscribed(actualUser, element) {
     for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
       if (actualUser['assignedChannel'][i] == element['channelID']) {

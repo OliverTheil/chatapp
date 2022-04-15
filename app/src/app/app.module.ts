@@ -41,6 +41,7 @@ import { DataService } from './data.service';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DropzoneDirective } from './directives/dropzone.directive';
+import { CommonModule } from '@angular/common'; 
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { DropzoneDirective } from './directives/dropzone.directive';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     
     
 

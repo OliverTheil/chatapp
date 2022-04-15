@@ -54,9 +54,10 @@
     </div>
     <div [class.hide]="hideDirects" class="aside__section__group">
       <div
-        *ngFor="let user of backend.userSelected"
+        *ngFor="let user of backend.userSelected; let i=index"
         class="aside__section__channel__div spaceBetween"
       >
+      <div *ngIf="i > 0">
         <img
           class="aside__section__user__img"
           src="https://avatars.dicebear.com/api/bottts/:{{
@@ -64,6 +65,7 @@
           }}.svg"
         />
         <p>{{ user["Firstname"] }}</p>
+      </div>
       </div>
       <div
         (click)="!userSearch ? (userSearch = true) : (userSearch = false)"
