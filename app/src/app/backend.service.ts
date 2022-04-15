@@ -72,6 +72,16 @@ export class BackendService {
       });
   }
 
+  getSelectedUser(user) {
+    this.firestore
+      .collection('users')
+      .doc(user)
+      .valueChanges()
+      .subscribe((changes: any) => {
+        this.userSelected = changes['userSelected'];
+      });
+  }
+
   selectedUser(userIDs, user) {
     if (!this.userSelected.includes(userIDs)) {
       this.userSelected.push(userIDs);
@@ -79,11 +89,8 @@ export class BackendService {
         .collection('users')
         .doc(user)
         .update({ userSelected: this.userSelected });
-      console.log(userIDs);
     }
   }
-
-  updateUserSelected() {}
 
   checkIfAlreadySubscribed(actualUser, element) {
     for (let i = 0; i < actualUser['assignedChannel'].length; i++) {

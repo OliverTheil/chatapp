@@ -217,7 +217,7 @@ export class AuthService {
         this.userName.lastName = userChanges['Lastname'];
         this.backend.setAllChannels(userChanges);
         this.backend.setAllUser();
-        this.backend.updateUserSelected();
+        this.backend.getSelectedUser(this.userData.uid);
       });
   }
 }
