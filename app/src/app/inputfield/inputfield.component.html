@@ -18,9 +18,6 @@
       <div contenteditable="true" class="preview-container">
         <img [src]="upload.downloadURL" *ngIf="upload.downloadURL" />
       </div>
-      <div class="progress__div" *ngIf="upload.percentage | async as pct">
-        <progress [value]="pct"></progress>
-      </div>
     </div>
   </div>
 

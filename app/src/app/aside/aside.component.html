@@ -108,7 +108,7 @@
         *ngFor="let user of backend.allUser"
         class="aside__section__channel__div spaceAround"
         (click)="
-          backend.selectedUser(user, AuthService.userData.uid);
+          backend.selectedUser(user.userData.uid, AuthService.userData.uid);
           userSearch = false
         "
         [class.hide]="
