@@ -63,7 +63,7 @@ export class InputfieldComponent implements OnInit {
         this.authService.userName.lastName;
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
-      this.thread.imgUrl = this.upload.downloadURL;
+      this.thread.imgUrl = '' || this.upload.downloadURL;
       this.backend.saveThread(this.thread);
       this.upload.downloadURL = null;
       this.thread.imgUrl = '';

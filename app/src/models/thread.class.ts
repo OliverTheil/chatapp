@@ -20,6 +20,7 @@ export class Thread {
   }
 
   public toJson() {
+   
     return {
       imgUrl: this.imgUrl,
       text: this.text,

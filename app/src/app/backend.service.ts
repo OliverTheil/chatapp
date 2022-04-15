@@ -169,7 +169,9 @@ export class BackendService {
   }
 
   saveThread(thread) {
-    console.log(thread.dateInMs);
+    if(!thread.imgUrl){
+      thread.imgUrl = '';
+    }
     this.firestore
       .collection('channels')
       .doc(this.channelID)
