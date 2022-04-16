@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
 import { user } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { time } from 'console';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class BackendService {
   public assignedChannel: any = [];
   public allUser: any;
   public userSelected: any = [];
+  imageLoaded = false;
   isAlreadyPushed = false;
   searchInput = '';
   searchUser = '';
@@ -90,9 +92,8 @@ export class BackendService {
         .doc(user)
         .update({ userSelected: this.userSelected });
     }
+    console.log(Date.now());
   }
-
-
 
   checkIfAlreadySubscribed(actualUser, element) {
     for (let i = 0; i < actualUser['assignedChannel'].length; i++) {
@@ -171,7 +172,7 @@ export class BackendService {
   }
 
   saveThread(thread) {
-    if(!thread.imgUrl){
+    if (!thread.imgUrl) {
       thread.imgUrl = '';
     }
     this.firestore

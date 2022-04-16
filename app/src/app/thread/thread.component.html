@@ -60,6 +60,7 @@
       ></textarea>
       <div
         [class.hide]="upload.downloadURL == null"
+        [class.hide]="backend.imageLoaded"
         class="inputfield__uploadArea"
       >
         <div contenteditable="true" class="preview-container">
@@ -75,9 +76,12 @@
         (change)="upload.startUpload($event)"
         #Upload
       />
-      <i (click)="Upload.click()" class="fa-solid fa-plus"></i>
       <i
-        [class.hide]="upload.downloadURL == null"
+        (click)="Upload.click(); backend.imageLoaded = false"
+        class="fa-solid fa-plus"
+      ></i>
+      <i
+        [class.hide]="upload.downloadURL == null || backend.imageLoaded"
         (click)="upload.downloadURL = null"
         class="fa-solid fa-minus"
       ></i>

@@ -67,7 +67,6 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SignUpUserData(result.user);
-        
       })
       .catch((error) => {
         if (error.message.includes('already')) {
@@ -176,8 +175,7 @@ export class AuthService {
         userSelected: [user.uid],
         Firstname: this.userName.firstName,
         Lastname: this.userName.lastName,
-      })
-     
+      });
   }
 
   SetGuestData(user: any) {
@@ -190,14 +188,16 @@ export class AuthService {
       emailVerified: user.emailVerified,
     };
 
-    return this.afs.collection('users').doc(user.uid).set({
-      userData,
-      assignedChannel: [],
-      userSelected: [],
-      Firstname: 'Guest',
-      Lastname: 'Account',
-    });
-
+    return this.afs
+      .collection('users')
+      .doc(user.uid)
+      .set({
+        userData,
+        assignedChannel: [],
+        userSelected: [],
+        Firstname: 'Guest',
+        Lastname: Date.now().toString().slice(6, 12),
+      });
   }
 
   // Sign out
