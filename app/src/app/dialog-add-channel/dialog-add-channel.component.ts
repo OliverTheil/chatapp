@@ -21,7 +21,8 @@ export class DialogAddChannelComponent implements OnInit {
   ngOnInit(): void {}
   createChannel() {
     console.log('create Channel Dialog:', this.channelName);
-    this.backend.createChannel(this.channelName);
+    this.backend.createChannel(this.userID, this.channelName);
+    
     this.backToChat();
   }
 

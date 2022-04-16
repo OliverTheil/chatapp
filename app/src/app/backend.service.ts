@@ -111,15 +111,6 @@ export class BackendService {
     this.isAlreadyPushed = false;
   }
 
-  subscribeChannel(userID, channelID) {
-    if (!this.assignedChannel.includes(channelID)) {
-      this.assignedChannel.push(channelID);
-      this.firestore
-        .collection('users')
-        .doc(userID)
-        .update({ assignedChannel: this.assignedChannel });
-    }
-  }
 
   async setAllThreats() {
     this.allMessages = [];
@@ -160,15 +151,28 @@ export class BackendService {
     return returnName;
   }
 
-  createChannel(channelName: string) {
+  createChannel(userID, channelName: string) {
     this.firestore
       .collection('channels')
       .add({ createdOn: Date.now(), channelName: channelName })
       .then((result: any) => {
         this.actualChannel = result.id;
         this.router.navigate(['/chat/' + this.actualChannel]);
+        this.subscribeChannel(userID, this.actualChannel);
       });
+      
   }
+
+  subscribeChannel(userID, channelID) {
+    if (!this.assignedChannel.includes(channelID)) {
+      this.assignedChannel.push(channelID);
+      this.firestore
+        .collection('users')
+        .doc(userID)
+        .update({ assignedChannel: this.assignedChannel });
+    }
+  }
+
 
   saveThread(thread) {
     if (!thread.imgUrl) {
