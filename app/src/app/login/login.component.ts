@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
   }
 
   routeToChats() {
-    this.router.navigate(['/chat/' + this.authService.userData.uid]);
+    this.backend.subscribeChannel(this.authService.userData.uid, 'mainChannel')
+    this.router.navigate(['/chat/mainChannel']);
   }
 
   logout() {
