@@ -166,16 +166,13 @@ export class AuthService {
       emailVerified: user.emailVerified,
     };
 
-    return this.afs
-      .collection('users')
-      .doc(user.uid)
-      .set({
-        userData,
-        assignedChannel: [],
-        userSelected: [user.uid],
-        Firstname: this.userName.firstName,
-        Lastname: this.userName.lastName,
-      });
+    return this.afs.collection('users').doc(user.uid).set({
+      userData,
+      assignedChannel: [],
+      userSelected: [],
+      Firstname: this.userName.firstName,
+      Lastname: this.userName.lastName,
+    });
   }
 
   SetGuestData(user: any) {

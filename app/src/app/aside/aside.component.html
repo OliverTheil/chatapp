@@ -54,18 +54,18 @@
     </div>
     <div [class.hide]="hideDirects" class="aside__section__group">
       <div
-        *ngFor="let user of backend.userSelected; let i=index"
+        *ngFor="let user of backend.userSelected"
         class="aside__section__channel__div spaceBetween"
       >
-      <div *ngIf="i > 0">
-        <img
-          class="aside__section__user__img"
-          src="https://avatars.dicebear.com/api/bottts/:{{
-            user.Firstname + ' ' + user.Lastname
-          }}.svg"
-        />
-        <p>{{ user["Firstname"] }}</p>
-      </div>
+        <div>
+          <img
+            class="aside__section__user__img"
+            src="https://avatars.dicebear.com/api/bottts/:{{
+              user.Firstname + ' ' + user.Lastname
+            }}.svg"
+          />
+          <p>{{ user["Firstname"] }}</p>
+        </div>
       </div>
       <div
         (click)="!userSearch ? (userSearch = true) : (userSearch = false)"
@@ -118,6 +118,7 @@
             .toLowerCase()
             .includes(this.backend.searchUser.toLowerCase())
         "
+        [class.hideUser]="user.userData.uid == AuthService.userData.uid"
       >
         <img
           class="aside__section__user__img"

@@ -84,4 +84,6 @@ export class AsideComponent implements OnInit {
   search() {
     this.backend.searchUser = this.searchInput;
   }
+
+  test(ownUserID, ID) {}
 }

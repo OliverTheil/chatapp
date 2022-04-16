@@ -92,7 +92,6 @@ export class BackendService {
         .doc(user)
         .update({ userSelected: this.userSelected });
     }
-    console.log(Date.now());
   }
 
   checkIfAlreadySubscribed(actualUser, element) {
