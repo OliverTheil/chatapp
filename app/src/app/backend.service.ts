@@ -10,6 +10,7 @@ import { user } from '@angular/fire/auth';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { time } from 'console';
+import { first } from 'rxjs-compat/operator/first';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,12 @@ export class BackendService {
     text: 'text from thread',
     creator: 'Creator',
     date: Date.now(),
+  };
+
+  selectedUserData = {
+    uid: '',
+    firstname: '',
+    lastname: '',
   };
   thread = new Thread(this.threadValues);
   actualChannel: string;
@@ -84,14 +91,20 @@ export class BackendService {
       });
   }
 
-  selectedUser(userIDs, user) {
-    if (!this.userSelected.includes(userIDs)) {
-      this.userSelected.push(userIDs);
-      this.firestore
-        .collection('users')
-        .doc(user)
-        .update({ userSelected: this.userSelected });
-    }
+  selectedUser(first, last, userIDs, user) {
+    this.selectedUserData = {
+      uid: userIDs,
+      firstname: first,
+      lastname: last,
+    };
+    this.userSelected.push(this.selectedUserData);
+    this.firestore
+      .collection('users')
+      .doc(user)
+      .update({ userSelected: this.userSelected });
+
+    console.log('JSON', this.selectedUserData);
+    console.log('ARRAY', this.userSelected);
   }
 
   checkIfAlreadySubscribed(actualUser, element) {
@@ -110,7 +123,6 @@ export class BackendService {
     }
     this.isAlreadyPushed = false;
   }
-
 
   async setAllThreats() {
     this.allMessages = [];
@@ -160,7 +172,6 @@ export class BackendService {
         this.router.navigate(['/chat/' + this.actualChannel]);
         this.subscribeChannel(userID, this.actualChannel);
       });
-      
   }
 
   subscribeChannel(userID, channelID) {
@@ -172,7 +183,6 @@ export class BackendService {
         .update({ assignedChannel: this.assignedChannel });
     }
   }
-
 
   saveThread(thread) {
     if (!thread.imgUrl) {

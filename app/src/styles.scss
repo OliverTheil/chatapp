@@ -114,6 +114,10 @@ section {
   display: none !important;
 }
 
+.hideAlwaysSelected {
+  display: none !important;
+}
+
 .hide__aside {
   @media (max-width: 900px) {
     display: none !important;

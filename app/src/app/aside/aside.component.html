@@ -53,18 +53,15 @@
       <i [class.turn]="hideDirects" class="fa-solid fa-caret-down"></i>
     </div>
     <div [class.hide]="hideDirects" class="aside__section__group">
-      <div
-        *ngFor="let user of backend.userSelected"
-        class="aside__section__channel__div spaceBetween"
-      >
-        <div>
+      <div *ngFor="let user of backend.userSelected" class="paddingLeftZero">
+        <div class="aside__section__channel__div spaceBetween paddingLeftZero">
           <img
             class="aside__section__user__img"
             src="https://avatars.dicebear.com/api/bottts/:{{
-              user.Firstname + ' ' + user.Lastname
+              user.firstname + ' ' + user.lastname
             }}.svg"
           />
-          <p>{{ user["Firstname"] }}</p>
+          <p>{{ user["firstname"] }}</p>
         </div>
       </div>
       <div
@@ -107,10 +104,15 @@
     </div>
     <div class="aside__searchUser">
       <div
-        *ngFor="let user of backend.allUser"
+        *ngFor="let user of backend.allUser; let i = index"
         class="aside__section__channel__div spaceAround"
         (click)="
-          backend.selectedUser(user.userData.uid, AuthService.userData.uid);
+          backend.selectedUser(
+            user.Firstname,
+            user.Lastname,
+            user.userData.uid,
+            AuthService.userData.uid
+          );
           userSearch = false
         "
         [class.hide]="

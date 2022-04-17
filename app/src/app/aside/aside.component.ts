@@ -30,6 +30,7 @@ export class AsideComponent implements OnInit {
 
   username: UserName;
   userId = '';
+  test = '';
 
   constructor(
     public afs: AngularFirestore,
@@ -84,6 +85,4 @@ export class AsideComponent implements OnInit {
   search() {
     this.backend.searchUser = this.searchInput;
   }
-
-  test(ownUserID, ID) {}
 }
