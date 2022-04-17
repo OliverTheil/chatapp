@@ -44,7 +44,7 @@
       </div>
     </div>
   </section>
-  <section class="aside__section">
+  <!-- <section class="aside__section">
     <div
       (click)="!hideDirects ? (hideDirects = true) : (hideDirects = false)"
       class="aside__section__heading"
@@ -72,8 +72,8 @@
         <p class="font--16">chat</p>
       </div>
     </div>
-  </section>
-  <section *ngIf="userClicked" class="aside__section userEdit fixed z--1">
+  </section> -->
+  <!-- <section *ngIf="userClicked" class="aside__section userEdit fixed z--1">
     <div class="userEdit__head">
       <p>{{ AuthService.userName.firstName }}</p>
       <img
@@ -88,7 +88,7 @@
       (click)="!userClicked ? (userClicked = true) : (userClicked = false)"
       class="fa-solid fa-xmark close absolute"
     ></i>
-  </section>
+  </section> -->
   <section
     *ngIf="userSearch"
     class="aside__searchUser__Container userEdit fixed z--1"
@@ -102,7 +102,7 @@
         type="text"
       />
     </div>
-    <div class="aside__searchUser">
+    <!-- <div class="aside__searchUser">
       <div
         *ngFor="let user of backend.allUser; let i = index"
         class="aside__section__channel__div spaceAround"
@@ -134,6 +134,6 @@
         (click)="!userSearch ? (userSearch = true) : (userSearch = false)"
         class="fa-solid fa-xmark close absolute"
       ></i>
-    </div>
+    </div> -->
   </section>
 </section>
