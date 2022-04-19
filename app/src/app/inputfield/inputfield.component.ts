@@ -23,7 +23,9 @@ export class InputfieldComponent implements OnInit {
     public upload: UploadServiceService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.upload.downloadURL = null;
+  }
 
   boldFont() {
     if (!this.bold) {
@@ -56,17 +58,17 @@ export class InputfieldComponent implements OnInit {
   }
 
   saveThread() {
-    if (this.thread.text != '' || this.upload.downloadURL != null) {
+    if (this.thread.text != null || this.upload.downloadURL != null) {
       this.thread.creator =
         this.authService.userName.firstName +
         ' ' +
         this.authService.userName.lastName;
       this.thread.dateInMs = Date.now();
       this.thread.date = this.backend.getActualDateFormat(Date.now());
-      this.thread.imgUrl = '' || this.upload.downloadURL;
+      this.thread.imgUrl = null || this.upload.downloadURL;
       this.backend.saveThread(this.thread);
       this.upload.downloadURL = null;
-      this.thread.imgUrl = '';
+      this.thread.imgUrl = null;
       this.thread.text = '';
       this.clear = '';
     }
